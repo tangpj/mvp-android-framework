@@ -1,5 +1,7 @@
 package com.mvp.framework.module.test.presenter;
 
+import android.util.Log;
+
 import com.google.gson.Gson;
 import com.mvp.framework.config.ApiInterface;
 import com.mvp.framework.module.base.presenter.BasePresenter;
@@ -16,6 +18,8 @@ import com.mvp.framework.module.test.view.iview.ITestView;
 
 public class TestPresenter extends BasePresenter{
 
+    private static final String TAG = "TestPresenter";
+
     private ITestView testView;
 
     public TestPresenter(ITestView testView) {
@@ -27,12 +31,13 @@ public class TestPresenter extends BasePresenter{
 
     @Override
     public void serverResponse(String response) {
+        Log.d(TAG, "serverResponse: " + response);
         BaseResponse baseResponse = new Gson().fromJson(response,BaseResponse.class);
-        if (baseResponse.status.success){
-            testView.showTestView();
-        }else {
-            testView.showServerError(baseResponse.status.errorCode,baseResponse.status.errorDesc);
-        }
+//        if (baseResponse.status.success){
+//            testView.showTestView();
+//        }else {
+//            testView.showServerError(baseResponse.status.errorCode,baseResponse.status.errorDesc);
+//        }
     }
 
 }

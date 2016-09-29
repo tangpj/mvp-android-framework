@@ -6,6 +6,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
 
+import com.mvp.framework.module.test.params.TestParams;
 import com.mvp.framework.module.test.presenter.TestPresenter;
 import com.mvp.framework.module.test.view.iview.ITestView;
 
@@ -27,7 +28,9 @@ public class MainActivity extends AppCompatActivity implements ITestView{
         test.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                presenter.accessServer(null);
+                TestParams params = new TestParams();
+                params.id = "ahbei";
+                presenter.accessServer(params);
             }
         });
 

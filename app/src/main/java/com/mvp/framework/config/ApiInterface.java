@@ -13,8 +13,6 @@ public class ApiInterface {
 
 
     //返回正确信息接口
-    public static final String TEST_SUCCESS = "/test_success.html";
+    public static final String TEST_SUCCESS = "/labs/bubbler/user/";
 
-    //返回错误信息接口
-    public static final String TEST_ERROR = "/test_error.html";
 }
