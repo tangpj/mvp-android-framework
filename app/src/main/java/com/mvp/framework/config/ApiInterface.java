@@ -12,7 +12,7 @@ package com.mvp.framework.config;
 public class ApiInterface {
 
 
-    //返回正确信息接口
-    public static final String TEST_SUCCESS = "/labs/bubbler/user/";
+    //宅言API-动漫台词接口
+    public static final String TEST = "/acman/zhaiyanapi/tcrand";
 
 }

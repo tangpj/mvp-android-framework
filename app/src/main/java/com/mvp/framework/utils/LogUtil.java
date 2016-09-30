@@ -15,7 +15,7 @@ public class LogUtil {
     private static final int warnLevel = 2;
     private static final int errorLevel = 3;
 
-    private static int level = 1 ; //决定显示的log等级
+    private static int level = 3 ; //决定显示的log等级
 
     public static void i(Class<?> clas, String msg){
         if (level >= infoLevel){

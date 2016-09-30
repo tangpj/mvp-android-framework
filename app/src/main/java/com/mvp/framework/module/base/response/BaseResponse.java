@@ -14,5 +14,9 @@ public class BaseResponse {
 
     public Status status;
 
+    public String errNum;
+
+    public String errMsg;
+
 
 }

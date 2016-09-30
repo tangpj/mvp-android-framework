@@ -14,10 +14,10 @@ public class ServerManager {
     public static final boolean SERVER_MODE = true; //等于true时使用生产环境，等于false使用测试环境
 
     public static final String SERVER_PRODUCTION
-            = "http://api.douban.com";    //生产环境服务器地址
+            = "http://apis.baidu.com";    //生产环境服务器地址
 
     public static final String SERVER_DEVELOPMENT
-            = "http://api.douban.com";   //测试环境服务器地址
+            = "http://apis.baidu.com";   //测试环境服务器地址
 
 
     public static final int COUNT = 10;  //分页取数据条数

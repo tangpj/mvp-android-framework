@@ -1,7 +1,9 @@
 package com.mvp.framework.module.test.presenter;
 
+import android.text.TextUtils;
 import android.util.Log;
 
+import com.android.volley.Request;
 import com.google.gson.Gson;
 import com.mvp.framework.config.ApiInterface;
 import com.mvp.framework.module.base.presenter.BasePresenter;
@@ -25,7 +27,8 @@ public class TestPresenter extends BasePresenter{
     public TestPresenter(ITestView testView) {
         super(testView);
         this.testView = testView;
-        getModel().setApiInterface(ApiInterface.TEST_SUCCESS);
+        getModel().setApiInterface(ApiInterface.TEST);
+        getModel().setMethod(Request.Method.GET);
 
     }
 
@@ -33,11 +36,11 @@ public class TestPresenter extends BasePresenter{
     public void serverResponse(String response) {
         Log.d(TAG, "serverResponse: " + response);
         BaseResponse baseResponse = new Gson().fromJson(response,BaseResponse.class);
-//        if (baseResponse.status.success){
-//            testView.showTestView();
-//        }else {
-//            testView.showServerError(baseResponse.status.errorCode,baseResponse.status.errorDesc);
-//        }
+        if (TextUtils.isEmpty(baseResponse.errNum)){
+            testView.showTestView();
+        }else {
+            testView.showServerError(baseResponse.errNum,baseResponse.errMsg);
+        }
     }
 
 }

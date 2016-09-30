@@ -11,5 +11,5 @@ import com.mvp.framework.module.base.params.BaseParams;
 
 public class TestParams extends BaseParams{
 
-    public String id;
+    public String cityname;
 }

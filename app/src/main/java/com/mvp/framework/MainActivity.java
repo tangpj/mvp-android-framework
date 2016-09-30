@@ -9,6 +9,7 @@ import android.widget.Toast;
 import com.mvp.framework.module.test.params.TestParams;
 import com.mvp.framework.module.test.presenter.TestPresenter;
 import com.mvp.framework.module.test.view.iview.ITestView;
+import com.mvp.framework.utils.LogUtil;
 
 
 public class MainActivity extends AppCompatActivity implements ITestView{
@@ -29,7 +30,7 @@ public class MainActivity extends AppCompatActivity implements ITestView{
             @Override
             public void onClick(View view) {
                 TestParams params = new TestParams();
-                params.id = "ahbei";
+                params.cityname = "广州";
                 presenter.accessServer(params);
             }
         });
@@ -53,6 +54,7 @@ public class MainActivity extends AppCompatActivity implements ITestView{
 
     @Override
     public void showServerError(String errorCode, String errorDesc) {
-        Toast.makeText(this,"服务器错误",Toast.LENGTH_SHORT).show();
+        LogUtil.e(MainActivity.class,"errorCode = " + errorCode + " & errorDesc = " + errorDesc);
+        Toast.makeText(this,errorDesc,Toast.LENGTH_SHORT).show();
     }
 }

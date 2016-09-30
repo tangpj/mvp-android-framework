@@ -7,10 +7,11 @@ import com.android.volley.RequestQueue;
 import com.android.volley.toolbox.Volley;
 
 /**
-*@author By Tang
- * 请求队列
-*Created on 2016-04-14 15:42
-*/
+ * @ClassName: SingletonRequestQueue
+ * @author create by Tang
+ * @date date 16/9/30 上午10:31
+ * @Description: volley请求队列
+ */
 public class SingletonRequestQueue {
     private static SingletonRequestQueue mInstance;
     private RequestQueue mRequestQueue;
