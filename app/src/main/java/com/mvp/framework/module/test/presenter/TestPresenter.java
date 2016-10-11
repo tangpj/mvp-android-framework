@@ -15,14 +15,18 @@ import com.mvp.framework.module.test.view.iview.ITestView;
  * @ClassName: TestPresenter
  * @author create by Tang
  * @date date 16/9/29 下午5:00
- * @Description: TODO
+ * @Description:
+ * 测试API
+ * 数据来源,百度宅言API
  */
+
 
 public class TestPresenter extends BasePresenter{
 
     private static final String TAG = "TestPresenter";
 
     private ITestView testView;
+
 
     public TestPresenter(ITestView testView) {
         super(testView);
