@@ -12,8 +12,8 @@
     tools:context="com.mvp.framework.MainActivity">
 
     <Button
-        android:id="@+id/zaiyan_btn"
-        android:text="宅言"
+        android:id="@+id/weather_btn"
+        android:text="天气查询"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         />

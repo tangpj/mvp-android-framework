@@ -6,39 +6,47 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
 
+import com.mvp.framework.module.test.bean.NuoMiCategoryBean;
+import com.mvp.framework.module.test.bean.WeatherBean;
 import com.mvp.framework.module.test.params.WeatherParams;
-import com.mvp.framework.module.test.presenter.ZaiYanPresenter;
-import com.mvp.framework.module.test.view.iview.IZaiYanView;
+import com.mvp.framework.module.test.presenter.NuoMiCategoryPresenter;
+import com.mvp.framework.module.test.presenter.WeatherPresenter;
+import com.mvp.framework.module.test.view.iview.INuoMiCategoryView;
+import com.mvp.framework.module.test.view.iview.IWeatherView;
 import com.mvp.framework.utils.LogUtil;
 
+import java.util.List;
 
-public class MainActivity extends AppCompatActivity implements IZaiYanView {
+
+public class MainActivity extends AppCompatActivity implements IWeatherView ,INuoMiCategoryView{
 
     private static final String TAG = "MainActivity";
 
-    private Button test;
+    private Button weather;
 
-    private ZaiYanPresenter presenter;
+    private WeatherPresenter presenter;
+
+    private NuoMiCategoryPresenter nuoMiCategoryPresenter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        presenter = new ZaiYanPresenter(this);
-        test = (Button) findViewById(R.id.zaiyan_btn);
-        test.setOnClickListener(new View.OnClickListener() {
+        presenter = new WeatherPresenter(this);
+        nuoMiCategoryPresenter = new NuoMiCategoryPresenter(this);
+        weather = (Button) findViewById(R.id.weather_btn);
+        weather.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                presenter.accessServer(null);
+                WeatherParams params = new WeatherParams();
+                params.cityname = "北京";
+                presenter.accessServer(params);
+                nuoMiCategoryPresenter.accessServer(null);
             }
         });
 
     }
 
-    @Override
-    public void showTestView() {
-        Toast.makeText(this,"获取成功",Toast.LENGTH_SHORT).show();
-    }
 
     @Override
     public void showProcess(boolean show) {
@@ -46,13 +54,25 @@ public class MainActivity extends AppCompatActivity implements IZaiYanView {
     }
 
     @Override
-    public void showVolleyError(int errorCode, String errorDesc, String ApiInterface) {
+    public void showVolleyError(int errorCode, String errorDesc, String apiInterface) {
         Toast.makeText(this,"网络错误",Toast.LENGTH_SHORT).show();
     }
 
     @Override
-    public void showServerError(String errorCode, String errorDesc) {
+    public void showServerError(int errorCode, String errorDesc) {
         LogUtil.e(MainActivity.class,"errorCode = " + errorCode + " & errorDesc = " + errorDesc);
         Toast.makeText(this,errorDesc,Toast.LENGTH_SHORT).show();
+    }
+
+
+    @Override
+    public void showWeatherView(WeatherBean data) {
+        Toast.makeText(this,data.weather,Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
+    public void showNuoMiCategoryView(List<NuoMiCategoryBean> nuoMiCategoryList) {
+        Toast.makeText(this,"成功",Toast.LENGTH_SHORT).show();
+
     }
 }

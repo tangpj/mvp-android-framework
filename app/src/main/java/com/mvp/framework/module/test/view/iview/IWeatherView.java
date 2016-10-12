@@ -1,6 +1,7 @@
 package com.mvp.framework.module.test.view.iview;
 
 import com.mvp.framework.module.base.view.IBaseView;
+import com.mvp.framework.module.test.bean.WeatherBean;
 
 /**
  * @ClassName: IWeatherView
@@ -11,5 +12,5 @@ import com.mvp.framework.module.base.view.IBaseView;
 
 public interface IWeatherView extends IBaseView{
 
-    void showWeatherView();
+    void showWeatherView(WeatherBean data);
 }

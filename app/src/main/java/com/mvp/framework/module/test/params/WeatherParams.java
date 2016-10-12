@@ -11,5 +11,5 @@ import com.mvp.framework.module.base.params.BaseParams;
 
 public class WeatherParams extends BaseParams{
 
-    public String city;
+    public String cityname;
 }

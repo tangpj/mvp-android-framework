@@ -10,5 +10,5 @@ public interface IBaseView {
 
     void showVolleyError(int errorCode, String errorDesc, String ApiInterface);
 
-    void showServerError(String errorCode, String errorDesc);
+    void showServerError(int errorCode, String errorDesc);
 }

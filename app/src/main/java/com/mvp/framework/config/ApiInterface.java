@@ -11,11 +11,10 @@ package com.mvp.framework.config;
 
 public class ApiInterface {
 
+    //查询城市的天气状况
+    public static final String WEATER = "/apistore/weatherservice/cityname";
 
-    //宅言API-动漫台词接口
-    public static final String ZAI_YAN = "/acman/zhaiyanapi/tcrand";
-
-    //天气查询API
-    public static final String WEATER = "/heweather/weather/free";
+    //百度糯米团单分类信息
+    public static final String NUO_MI_CATEGOR = "/baidunuomi/openapi/categories";
 
 }
