@@ -13,6 +13,9 @@ public class ApiInterface {
 
 
     //宅言API-动漫台词接口
-    public static final String TEST = "/acman/zhaiyanapi/tcrand";
+    public static final String ZAI_YAN = "/acman/zhaiyanapi/tcrand";
+
+    //天气查询API
+    public static final String WEATER = "/heweather/weather/free";
 
 }

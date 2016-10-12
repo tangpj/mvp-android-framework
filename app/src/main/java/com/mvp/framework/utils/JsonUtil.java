@@ -1,6 +1,9 @@
 package com.mvp.framework.utils;
 
 import com.google.gson.Gson;
+import com.google.gson.JsonObject;
+
+import org.json.JSONObject;
 
 /**
  * @ClassName: JsonUtil
@@ -15,8 +18,8 @@ public class JsonUtil {
         return gson.toJson(src);
     }
 
-    public static <T> T fromJson(String jsonObject, Class<T> typeToSrc){
+    public static <T> T fromJson(JSONObject jsonObject, Class<T> typeToSrc){
         Gson gson = new Gson();
-        return gson.fromJson(jsonObject,typeToSrc);
+        return gson.fromJson(String.valueOf(jsonObject),typeToSrc);
     }
 }

@@ -13,10 +13,11 @@ import java.util.Map;
  * @author create by Tang
  * @date date 16/8/22 下午5:02
  * @Description: presenter基类
+ * @P: 提交到服务器的参数类
  */
-public interface IBasePresenter<T> {
+public interface IBasePresenter<P> {
 
-    void accessServer(T params);
+    void accessServer(P params);
 
     void accessSucceed(JSONObject response);
 

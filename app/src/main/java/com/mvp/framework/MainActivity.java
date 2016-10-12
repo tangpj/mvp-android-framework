@@ -6,32 +6,30 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
 
-import com.mvp.framework.module.test.params.TestParams;
-import com.mvp.framework.module.test.presenter.TestPresenter;
-import com.mvp.framework.module.test.view.iview.ITestView;
+import com.mvp.framework.module.test.params.WeatherParams;
+import com.mvp.framework.module.test.presenter.ZaiYanPresenter;
+import com.mvp.framework.module.test.view.iview.IZaiYanView;
 import com.mvp.framework.utils.LogUtil;
 
 
-public class MainActivity extends AppCompatActivity implements ITestView{
+public class MainActivity extends AppCompatActivity implements IZaiYanView {
 
     private static final String TAG = "MainActivity";
 
     private Button test;
 
-    private TestPresenter presenter;
+    private ZaiYanPresenter presenter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        presenter = new TestPresenter(this);
-        test = (Button) findViewById(R.id.button);
+        presenter = new ZaiYanPresenter(this);
+        test = (Button) findViewById(R.id.zaiyan_btn);
         test.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                TestParams params = new TestParams();
-                params.cityname = "广州";
-                presenter.accessServer(params);
+                presenter.accessServer(null);
             }
         });
 

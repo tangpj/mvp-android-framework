@@ -26,7 +26,7 @@ public class BaseVolleyModel implements IBaseModel {
 
     private MyVolleyRequest request;
 
-    private int method = Request.Method.POST;       //请求方式，默认post
+    private int method = Request.Method.GET;       //请求方式，默认get
     private String apiInterface;
 
     private IBasePresenter basePresenter;

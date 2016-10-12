@@ -12,8 +12,8 @@
     tools:context="com.mvp.framework.MainActivity">
 
     <Button
-        android:id="@+id/button"
-        android:text="Test"
+        android:id="@+id/zaiyan_btn"
+        android:text="宅言"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         />

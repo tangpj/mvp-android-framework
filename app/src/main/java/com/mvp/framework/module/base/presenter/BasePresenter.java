@@ -1,10 +1,14 @@
 package com.mvp.framework.module.base.presenter;
 
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 import com.mvp.framework.module.base.model.BaseVolleyModel;
 import com.mvp.framework.module.base.model.imodel.IBaseModel;
 import com.mvp.framework.module.base.params.BaseParams;
 import com.mvp.framework.module.base.presenter.ipresenter.IBasePresenter;
+import com.mvp.framework.module.base.response.BaiduBaseResponse;
 import com.mvp.framework.module.base.view.IBaseView;
+import com.mvp.framework.utils.JsonUtil;
 
 
 import org.json.JSONObject;
@@ -16,14 +20,17 @@ import java.util.Map;
  * @author create by Tang
  * @date date 16/9/29 下午2:14
  * @Description: 普通presenter基类
+ * @P: 提交参数类
+ * @D: 服务器返回数据
  */
-public abstract class BasePresenter<T extends BaseParams> implements IBasePresenter<T> {
+public abstract class BasePresenter<P extends BaseParams,D>
+        implements IBasePresenter<P> {
 
-    public abstract void serverResponse(String response);
+    public abstract void serverResponse(BaiduBaseResponse<D> response);
 
     private IBaseModel baseModel;
     private IBaseView baseView;
-    private T params;
+    private P params;
 
     protected BasePresenter(IBaseView baseView){
         this.baseView = baseView;
@@ -46,7 +53,7 @@ public abstract class BasePresenter<T extends BaseParams> implements IBasePresen
 
 
     @Override
-    public void accessServer(T params) {
+    public void accessServer(P params) {
         this.params = params;
         baseView.showProcess(true);
         baseModel.sendRequestToServer();
@@ -55,7 +62,8 @@ public abstract class BasePresenter<T extends BaseParams> implements IBasePresen
     @Override
     public void accessSucceed(JSONObject response) {
         baseView.showProcess(false);
-        serverResponse(String.valueOf(response));
+        BaiduBaseResponse<D> mResponse = JsonUtil.fromJson(response,BaiduBaseResponse.class);
+        serverResponse(mResponse);
     }
 
 
