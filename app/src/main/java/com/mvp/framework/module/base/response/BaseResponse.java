@@ -10,7 +10,7 @@ import com.google.gson.annotations.SerializedName;
  * 基础返回数据处理类
  * 一些基础的返回处理可以放在这里
  */
-public class BaseResponse<T>{
+public class BaseResponse<D>{
 
     @SerializedName(value = "errNum",alternate = {"status","errno"})
     public int errNum;
@@ -25,7 +25,7 @@ public class BaseResponse<T>{
      * @restData: 百度api,天气data
      */
     @SerializedName(value = "data",alternate = {"retData","categories"})
-    public T data;
+    public D data;
 
 
 }
