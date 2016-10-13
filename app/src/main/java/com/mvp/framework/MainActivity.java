@@ -22,7 +22,8 @@ public class MainActivity extends AppCompatActivity implements IWeatherView ,INu
 
     private static final String TAG = "MainActivity";
 
-    private Button weather;
+    private Button weatherBtn;
+    private Button nuoMiCategoryBtn;
 
     private WeatherPresenter presenter;
 
@@ -32,18 +33,35 @@ public class MainActivity extends AppCompatActivity implements IWeatherView ,INu
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        initView();
+
         presenter = new WeatherPresenter(this);
         nuoMiCategoryPresenter = new NuoMiCategoryPresenter(this);
-        weather = (Button) findViewById(R.id.weather_btn);
-        weather.setOnClickListener(new View.OnClickListener() {
+
+
+    }
+
+    private void initView(){
+        weatherBtn = (Button) findViewById(R.id.weather_btn);
+        nuoMiCategoryBtn = (Button) findViewById(R.id.nuo_mi_category_btn);
+
+        weatherBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 WeatherParams params = new WeatherParams();
                 params.cityname = "北京";
                 presenter.accessServer(params);
+            }
+        });
+
+        nuoMiCategoryBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
                 nuoMiCategoryPresenter.accessServer(null);
             }
         });
+
 
     }
 
