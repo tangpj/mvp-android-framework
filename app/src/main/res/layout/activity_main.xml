@@ -25,5 +25,11 @@
         android:layout_height="wrap_content"
         android:text="获取糯米分类"/>
 
+    <Button
+        android:id="@+id/currency_btn"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="汇率转换"/>
+
 
 </LinearLayout>

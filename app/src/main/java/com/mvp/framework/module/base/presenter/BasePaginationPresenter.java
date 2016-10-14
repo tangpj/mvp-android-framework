@@ -18,21 +18,21 @@ import java.util.Map;
  * @author create by Tang
  * @date date 16/9/29 下午2:14
  * @Description:
- * @T: 请求参数类（http中的params）
- * @S: 返回队列的数据项实体类（bean中的实体类）
+ * @P: 请求参数类（http中的params）
+ * @B: 返回队列的数据项实体类（bean中的实体类）
  */
-public abstract class BasePaginationPresenter<T extends BasePaginationParams,S>
-        implements IBasePaginationPresenter<T,S> {
+public abstract class BasePaginationPresenter<P extends BasePaginationParams,B>
+        implements IBasePaginationPresenter<P,B> {
 
     public abstract void serverResponse(String response);
 
     private IBaseView baseView;
     private IBaseModel baseModel;
-    private T params;
+    private P params;
     private boolean isPagination = true;   //默认为分页
 
-    private ArrayList<S> dataList = new ArrayList<>();
-    private ArrayList<S> currentList = new ArrayList<>();
+    private ArrayList<B> dataList = new ArrayList<>();
+    private ArrayList<B> currentList = new ArrayList<>();
 
     protected BasePaginationPresenter(IBaseView baseView){
         this.baseView = baseView;
@@ -42,7 +42,7 @@ public abstract class BasePaginationPresenter<T extends BasePaginationParams,S>
 
 
     @Override
-    public void refresh(T params) {
+    public void refresh(P params) {
         dataList.clear();
         accessServer(params);
     }
@@ -64,7 +64,7 @@ public abstract class BasePaginationPresenter<T extends BasePaginationParams,S>
     }
 
     @Override
-    public void setData(ArrayList list) {
+    public void addData(ArrayList list) {
         currentList = list;
         this.dataList.addAll(currentList);
     }
@@ -92,7 +92,7 @@ public abstract class BasePaginationPresenter<T extends BasePaginationParams,S>
     }
 
     @Override
-    public void accessServer(T params) {
+    public void accessServer(P params) {
         this.params = params;
         baseView.showProcess(true);
         baseModel.sendRequestToServer();

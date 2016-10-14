@@ -1,5 +1,6 @@
 package com.mvp.framework.module.base.response;
 
+import com.google.gson.JsonObject;
 import com.google.gson.annotations.SerializedName;
 
 /**
@@ -10,7 +11,7 @@ import com.google.gson.annotations.SerializedName;
  * 基础返回数据处理类
  * 一些基础的返回处理可以放在这里
  */
-public class BaseResponse<D>{
+public class BaseResponse{
 
     @SerializedName(value = "errNum",alternate = {"status","errno"})
     public int errNum;
@@ -24,8 +25,8 @@ public class BaseResponse<D>{
      * @Description: 兼容不同的情况
      * @restData: 百度api,天气data
      */
-    @SerializedName(value = "data",alternate = {"retData","categories"})
-    public D data;
+    @SerializedName(value = "data",alternate = {"retData","categories","shop"})
+    public JsonObject data;
 
 
 }
