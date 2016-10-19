@@ -1,6 +1,7 @@
 package com.mvp.framework.module.base.presenter;
 
 import com.google.gson.Gson;
+import com.google.gson.internal.$Gson$Types;
 import com.google.gson.reflect.TypeToken;
 import com.mvp.framework.module.base.model.BaseVolleyModel;
 import com.mvp.framework.module.base.model.imodel.IBaseModel;
@@ -15,6 +16,7 @@ import com.mvp.framework.utils.JsonUtil;
 
 import org.json.JSONObject;
 
+import java.lang.reflect.ParameterizedType;
 import java.lang.reflect.Type;
 import java.util.List;
 import java.util.Map;
@@ -88,8 +90,12 @@ public abstract class BasePresenter<Params extends BaseParams,Data>
     public void accessSucceed(JSONObject response) {
         baseView.showProcess(false);
         Gson gson = new Gson();
-        BaseResponse mResponse = gson.fromJson(String.valueOf(response)
-                ,new TypeToken<BaseResponse>() {}.getType());
+        BaseResponse<Data> mResponse;
+        ParameterizedType parameterized = type(BaseResponse.class,clazz);
+        Type type = $Gson$Types.canonicalize(parameterized);
+        mResponse = gson.fromJson(String.valueOf(response),type);
+
+
         /**
          * 在实际设计系统的时候，通过状态码来判断服务器是否正确响应
          * 如果响应错误，可以在这里直接通知view层错误情况
@@ -98,7 +104,7 @@ public abstract class BasePresenter<Params extends BaseParams,Data>
          */
 
         if (mResponse.errNum == 0){
-            serverResponse(gson.fromJson(mResponse.data,clazz));
+            serverResponse(mResponse.data);
         }else {
             baseView.showServerError(mResponse.errNum,mResponse.errMsg);
         }
@@ -113,5 +119,34 @@ public abstract class BasePresenter<Params extends BaseParams,Data>
     @Override
     public void cancelRequest() {
         baseModel.cancelRequest();
+    }
+
+
+    /**
+     * ParameterizedType对象，对于Object、接口和原始类型返回null，对于数组class则是返回Object.class。
+     * ParameterizedType是表示带有泛型参数的类型的Java类型，
+     * JDK1.5引入了泛型之后，Java中所有的Class都实现了Type接口，ParameterizedType则是继承了Type接口，
+     * 所有包含泛型的Class类都会实现这个接口。
+     * @param raw
+     * @param args
+     * @return
+     */
+    public static ParameterizedType type(final Class raw,final Type... args){
+        return new ParameterizedType() {
+            @Override
+            public Type[] getActualTypeArguments() {
+                return args;
+            }
+
+            @Override
+            public Type getRawType() {
+                return raw;
+            }
+
+            @Override
+            public Type getOwnerType() {
+                return null;
+            }
+        };
     }
 }

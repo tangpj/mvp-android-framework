@@ -17,7 +17,7 @@ public class WeatherPresenter extends BasePresenter<WeatherParams,WeatherBean> {
     private IWeatherView weatherView;
 
     public WeatherPresenter(IWeatherView weatherView) {
-        super(weatherView);
+        super(weatherView,WeatherBean.class);
         this.weatherView = weatherView;
         getModel().setApiInterface(ApiInterface.WEATER);
     }

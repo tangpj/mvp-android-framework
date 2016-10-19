@@ -1,5 +1,6 @@
 package com.mvp.framework.module.test.presenter;
 
+import com.android.volley.Request;
 import com.mvp.framework.config.ApiInterface;
 import com.mvp.framework.module.base.presenter.BasePresenter;
 import com.mvp.framework.module.test.bean.NuoMiShopInfoBean;
@@ -22,7 +23,7 @@ public class NuoMiShopInfoPresenter extends BasePresenter<NuoMiShopInfoParams,Nu
         super(currencyView,NuoMiShopInfoBean.class);
         this.currencyView = currencyView;
         getModel().setApiInterface(ApiInterface.NUO_MI_SHOP_INFO);
-        getModel().getClass();
+        getModel().setMethod(Request.Method.POST);
     }
 
     @Override

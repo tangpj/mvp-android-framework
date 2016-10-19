@@ -12,12 +12,12 @@ package com.mvp.framework.config;
 public class ApiInterface {
 
     //查询城市的天气状况
-    public static final String WEATER = "/apistore/weatherservice/cityname";
+    public static final String WEATER = "/apistore/weatherservice/cityname?cityname=北京";
 
     //百度糯米团单分类信息
     public static final String NUO_MI_CATEGOR = "/baidunuomi/openapi/categories";
 
     //汇率转换
-    public static final String NUO_MI_SHOP_INFO = "/baidunuomi/openapi/shopinfo?shop_id=1745896";
+    public static final String NUO_MI_SHOP_INFO = "/baidunuomi/openapi/shopinfo";
 
 }
