@@ -17,7 +17,7 @@ public class ApiInterface {
     //百度糯米团单分类信息
     public static final String NUO_MI_CATEGOR = "/baidunuomi/openapi/categories";
 
-    //汇率转换
-    public static final String NUO_MI_SHOP_INFO = "/baidunuomi/openapi/shopinfo";
+    //获取糯米商家信息
+    public static final String NUO_MI_SHOP_INFO = "/baidunuomi/openapi/shopinfo?shop_id=1745896";
 
 }

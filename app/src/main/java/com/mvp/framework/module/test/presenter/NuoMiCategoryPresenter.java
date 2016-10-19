@@ -1,6 +1,10 @@
 package com.mvp.framework.module.test.presenter;
 
+import android.util.Log;
+
+import com.mvp.framework.module.base.params.BasePaginationParams;
 import com.mvp.framework.module.base.params.BaseParams;
+import com.mvp.framework.module.base.presenter.BasePaginationPresenter;
 import com.mvp.framework.module.base.presenter.BasePresenter;
 import com.mvp.framework.module.test.bean.NuoMiCategoryBean;
 import com.mvp.framework.module.test.view.iview.INuoMiCategoryView;
@@ -17,18 +21,25 @@ import static com.mvp.framework.config.ApiInterface.NUO_MI_CATEGOR;
  * @Description: 暂未完成，请勿查看
  */
 
-public class NuoMiCategoryPresenter extends BasePresenter<BaseParams,ArrayList<NuoMiCategoryBean>>{
+public class NuoMiCategoryPresenter extends BasePaginationPresenter<BasePaginationParams,NuoMiCategoryBean> {
 
     private INuoMiCategoryView nuoMiCategoryView;
 
     public NuoMiCategoryPresenter(INuoMiCategoryView nuoMiCategoryView) {
-        super(nuoMiCategoryView);
+        super(nuoMiCategoryView,NuoMiCategoryBean.class);
         this.nuoMiCategoryView = nuoMiCategoryView;
         getModel().setApiInterface(NUO_MI_CATEGOR);
     }
 
+
+
     @Override
-    public void serverResponse(ArrayList<NuoMiCategoryBean> data) {
-        nuoMiCategoryView.showNuoMiCategoryView(data);
+    public void resultNextPage(List<NuoMiCategoryBean> data) {
+
+    }
+
+    @Override
+    public void resultAssignPage(int page, List<NuoMiCategoryBean> data) {
+
     }
 }

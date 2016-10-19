@@ -18,8 +18,10 @@ import com.mvp.framework.module.test.presenter.WeatherPresenter;
 import com.mvp.framework.module.test.view.iview.INuoMiShopInfoView;
 import com.mvp.framework.module.test.view.iview.INuoMiCategoryView;
 import com.mvp.framework.module.test.view.iview.IWeatherView;
+import com.mvp.framework.utils.ListUtils;
 import com.mvp.framework.utils.LogUtil;
 
+import java.util.ArrayList;
 import java.util.List;
 
 
@@ -36,6 +38,11 @@ public class MainActivity extends AppCompatActivity implements IWeatherView
     private NuoMiCategoryPresenter nuoMiCategoryPresenter;
     private NuoMiShopInfoPresenter nuoMiShopInfoPresenter;
 
+    List<String> a ;
+    List<String> b ;
+
+    int count = 3;
+
 
 
     @Override
@@ -49,6 +56,27 @@ public class MainActivity extends AppCompatActivity implements IWeatherView
         nuoMiCategoryPresenter = new NuoMiCategoryPresenter(this);
         nuoMiShopInfoPresenter = new NuoMiShopInfoPresenter(this);
 
+
+        //验证replaceAssign方法能否正确运行
+        a = new ArrayList<>();
+        a.add("1");
+        a.add("2");
+        a.add("3");
+        a.add("4");
+        a.add("5");
+        a.add("6");
+        a.add("7");
+        a.add("8");
+        a.add("9");
+
+        b = new ArrayList<>();
+        b.add("b4");
+        b.add("b5");
+        b.add("b6");
+
+        a.addAll(b);
+        int start = 5 / count * count;
+        ListUtils.replaceAssign(start,a,b);
 
     }
 
@@ -69,7 +97,7 @@ public class MainActivity extends AppCompatActivity implements IWeatherView
         nuoMiCategoryBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                nuoMiCategoryPresenter.accessServer(null);
+                nuoMiCategoryPresenter.refresh(null);
             }
         });
 

@@ -14,12 +14,12 @@ import com.mvp.framework.network.SingletonRequestQueue;
 import org.json.JSONObject;
 
 /**
- * @ClassName: BaseVolleyModel
+ * @ClassName: BaseModel
  * @author create by Tang
  * @date date 16/9/29 下午3:17
  * @Description: 通过volley框架从服务器获取数据
  */
-public class BaseVolleyModel implements IBaseModel {
+public class BaseModel implements IBaseModel {
 
     private static final int  VOLLEY_ERROR = 10001;   //网络错误
     private static final String VOLLEY_ERROR_DESC = "点击屏幕重新加载";
@@ -31,7 +31,7 @@ public class BaseVolleyModel implements IBaseModel {
 
     private IBasePresenter basePresenter;
 
-    public BaseVolleyModel(IBasePresenter basePresenter){
+    public BaseModel(IBasePresenter basePresenter){
         this.basePresenter = basePresenter;
     }
 
@@ -40,7 +40,7 @@ public class BaseVolleyModel implements IBaseModel {
     public void sendRequestToServer() {
 
         request = new MyVolleyRequest(method, ServerManager.getServerUrl(apiInterface)
-                , basePresenter.getParams()
+                , basePresenter.setParams()
                 , new Response.Listener<JSONObject>() {
             @Override
             public void onResponse(JSONObject response) {
@@ -68,7 +68,7 @@ public class BaseVolleyModel implements IBaseModel {
 
     @Override
     public void cancelRequest() {
-        if (request != null){
+        if (request != null && !request.isCanceled()){
             request.cancel();
         }
 

@@ -1,6 +1,5 @@
 package com.mvp.framework.module.base.presenter.ipresenter;
 
-import com.mvp.framework.module.base.model.BaseVolleyModel;
 import com.mvp.framework.module.base.model.imodel.IBaseModel;
 
 import org.json.JSONObject;
@@ -15,13 +14,13 @@ import java.util.Map;
  * @Description: presenter基类
  * @P: 提交到服务器的参数类
  */
-public interface IBasePresenter<P> {
+public interface IBasePresenter<Params> {
 
-    void accessServer(P params);
+    void accessServer(Params params);
 
     void accessSucceed(JSONObject response);
 
-    Map getParams();
+    Map setParams();
 
     IBaseModel getModel();
 
