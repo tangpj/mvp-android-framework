@@ -4,7 +4,7 @@ import com.mvp.framework.module.base.model.BaseUploadModel;
 import com.mvp.framework.module.base.model.imodel.IBaseModel;
 import com.mvp.framework.module.base.params.FileUploadParams;
 import com.mvp.framework.module.base.presenter.ipresenter.IBaseUploadPresenter;
-import com.mvp.framework.module.base.view.IBaseView;
+import com.mvp.framework.module.base.view.iview.IBaseView;
 
 
 import org.json.JSONObject;

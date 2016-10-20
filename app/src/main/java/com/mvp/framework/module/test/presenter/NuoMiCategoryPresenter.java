@@ -32,14 +32,8 @@ public class NuoMiCategoryPresenter extends BasePaginationPresenter<BasePaginati
     }
 
 
-
     @Override
-    public void resultNextPage(List<NuoMiCategoryBean> data) {
-
-    }
-
-    @Override
-    public void resultAssignPage(int page, List<NuoMiCategoryBean> data) {
-
+    public void serverResponse(List<NuoMiCategoryBean> list) {
+        nuoMiCategoryView.showNuoMiCategoryView(list);
     }
 }

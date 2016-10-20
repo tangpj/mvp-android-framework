@@ -1,6 +1,6 @@
 package com.mvp.framework.module.test.view.iview;
 
-import com.mvp.framework.module.base.view.IBaseView;
+import com.mvp.framework.module.base.view.iview.IBaseView;
 import com.mvp.framework.module.test.bean.WeatherBean;
 
 /**

@@ -1,5 +1,7 @@
 package com.mvp.framework.module.base.presenter;
 
+import android.support.annotation.NonNull;
+
 import com.google.gson.Gson;
 import com.google.gson.internal.$Gson$Types;
 import com.mvp.framework.config.ServerManager;
@@ -8,18 +10,17 @@ import com.mvp.framework.module.base.model.imodel.IBaseModel;
 import com.mvp.framework.module.base.params.BasePaginationParams;
 import com.mvp.framework.module.base.presenter.ipresenter.IBasePaginationPresenter;
 import com.mvp.framework.module.base.response.BaseResponse;
-import com.mvp.framework.module.base.view.IBaseView;
+import com.mvp.framework.module.base.view.iview.IBaseView;
 import com.mvp.framework.utils.ClassTypeUtil;
+import com.mvp.framework.utils.ListUtils;
 
 import org.json.JSONObject;
 
 import java.lang.reflect.ParameterizedType;
 import java.lang.reflect.Type;
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.List;
 import java.util.Map;
-import java.util.function.UnaryOperator;
 
 
 /**
@@ -33,49 +34,34 @@ import java.util.function.UnaryOperator;
 public abstract class BasePaginationPresenter<Params extends BasePaginationParams,Bean>
         implements IBasePaginationPresenter<Params,Bean> {
 
-    /**
-     * @Method: responseNextPage
-     * @author create by Tang
-     * @date date 16/10/19 下午4:56
-     * @Description: 返回下一页数据
-     */
-    public abstract void resultNextPage(List<Bean> data);
-
-    /**
-     * @Method: responseAssignPage
-     * @author create by Tang
-     * @date date 16/10/19 下午4:56
-     * @Description: 返回指定页页数据
-     * @param page
-     */
-    public abstract void resultAssignPage(int page,List<Bean> data);
+    public abstract void serverResponse(List<Bean> list);
 
     private IBaseView baseView;
     private IBaseModel baseModel;
     private Params mParams;
 
-
-    /**
-     * @author create by Tang
-     * @date date 16/10/19 下午3:06
-     * @Description: 获取页面数据的类型
-     * 下一页或指定页
-     */
-    //需要刷新的页数
-    private int refreshPage = -1;
-
     //默认一次去数据为ServerManager.COUNT
-    private int count = ServerManager.COUNT;
+    private int mCount = ServerManager.COUNT;
 
-    //获取指定页数据
-    private int mPage = -1;
+    //需要刷新的数据项位置
+    private int mIndex = -1;
+
+    //需要刷新的页码（根据mIndex计算）
+    private int mPage;
 
     private List<Bean> dataList = new ArrayList<>();
 
 
     private Class<Bean> clazz;
 
-    protected BasePaginationPresenter(IBaseView baseView,Class<Bean> clazz){
+    /**
+     * @Method: BasePaginationPresenter
+     * @author create by Tang
+     * @date date 16/10/20 上午10:18
+     * @Description: 构造方法
+     * @param clazz 队列参数项的类型，不能为空
+     */
+    protected BasePaginationPresenter(@NonNull IBaseView baseView,@NonNull Class<Bean> clazz){
         this.baseView = baseView;
         this.baseModel = new BaseModel(this);
         this.clazz = clazz;
@@ -94,11 +80,11 @@ public abstract class BasePaginationPresenter<Params extends BasePaginationParam
     public void getNextPage() {
         if (mParams == null){
             mParams = (Params) new BasePaginationParams();
-            mParams.count = count;
+            mParams.count = mCount;
             mParams.page = (int) Math.ceil((double)
                     dataList.size() * 1.0 / ServerManager.COUNT) + 1;
         }else {
-            mParams.count = count;
+            mParams.count = mCount;
             mParams.page = (int) Math.ceil((double)
                     dataList.size() * 1.0 / ServerManager.COUNT) + 1;
         }
@@ -107,18 +93,23 @@ public abstract class BasePaginationPresenter<Params extends BasePaginationParam
     }
 
     @Override
-    public void refreshAssignPage(int page) {
-        if (page > (int) Math.ceil((double) dataList.size() * 1.0 / ServerManager.COUNT)){
-
-            //如果page大于当前的页数则加载下一页
+    public void refreshIndexPage(int index) {
+        if (index > dataList.size()){
+            //如果index超出数组长度则加载下一页
             getNextPage();
         }else {
+            /**
+             * 注需要根据服务器实际情况来计算
+             * 这里假设服务器第一页数据的下标为1
+             * 如果下表为0，mPage = index / mCount;
+             */
+            mPage = index / mCount + 1;
             if (mParams == null){
                 mParams = (Params) new BasePaginationParams();
-                mParams.count = count;
+                mParams.count = mCount;
                 mParams.page = mPage;
             }else {
-                mParams.count = count;
+                mParams.count = mCount;
                 mParams.page = mPage;
             }
         }
@@ -128,7 +119,7 @@ public abstract class BasePaginationPresenter<Params extends BasePaginationParam
 
     @Override
     public void setCount(int count) {
-        this.count = count;
+        this.mCount = count;
     }
 
     @Override
@@ -193,15 +184,21 @@ public abstract class BasePaginationPresenter<Params extends BasePaginationParam
         Type type = $Gson$Types.canonicalize(parameterized);
         BaseResponse<List<Bean>> mResponse = new Gson().fromJson(responseStr, type);
 
-
-        if (mPage < 0){
-            dataList.addAll(mResponse.data);
-            resultNextPage(mResponse.data);
+        if (mResponse.errNum == 0){
+            if (mIndex < 0){
+                dataList.addAll(mResponse.data);
+            }else {
+                //计算出需要替换的第一个数据在dataList中的位置
+                int start = mPage * mCount;
+                ListUtils.replaceAssign(start,dataList,mResponse.data);
+                mIndex = -1;
+            }
+            serverResponse(dataList);
         }else {
-
-
-            resultAssignPage(mPage,mResponse.data);
+            baseView.showServerError(mResponse.errNum,mResponse.errMsg);
         }
+
+
 
     }
 

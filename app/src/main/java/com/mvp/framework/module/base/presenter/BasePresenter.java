@@ -7,7 +7,7 @@ import com.mvp.framework.module.base.model.imodel.IBaseModel;
 import com.mvp.framework.module.base.params.BaseParams;
 import com.mvp.framework.module.base.presenter.ipresenter.IBasePresenter;
 import com.mvp.framework.module.base.response.BaseResponse;
-import com.mvp.framework.module.base.view.IBaseView;
+import com.mvp.framework.module.base.view.iview.IBaseView;
 import com.mvp.framework.utils.ClassTypeUtil;
 
 

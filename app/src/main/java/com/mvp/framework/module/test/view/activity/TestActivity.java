@@ -1,71 +1,65 @@
-package com.mvp.framework;
+package com.mvp.framework.module.test.view.activity;
 
-import android.app.ListActivity;
-import android.content.Intent;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
+import android.support.annotation.NonNull;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.Toast;
 
-import com.mvp.framework.module.test.bean.NuoMiShopInfoBean;
+import com.mvp.framework.R;
+import com.mvp.framework.module.base.view.activity.BaseActivity;
 import com.mvp.framework.module.test.bean.NuoMiCategoryBean;
+import com.mvp.framework.module.test.bean.NuoMiShopInfoBean;
 import com.mvp.framework.module.test.bean.WeatherBean;
 import com.mvp.framework.module.test.params.NuoMiShopInfoParams;
 import com.mvp.framework.module.test.params.WeatherParams;
-import com.mvp.framework.module.test.presenter.NuoMiShopInfoPresenter;
 import com.mvp.framework.module.test.presenter.NuoMiCategoryPresenter;
+import com.mvp.framework.module.test.presenter.NuoMiShopInfoPresenter;
 import com.mvp.framework.module.test.presenter.WeatherPresenter;
-import com.mvp.framework.module.test.view.activity.TestActivity;
-import com.mvp.framework.module.test.view.iview.INuoMiShopInfoView;
 import com.mvp.framework.module.test.view.iview.INuoMiCategoryView;
+import com.mvp.framework.module.test.view.iview.INuoMiShopInfoView;
 import com.mvp.framework.module.test.view.iview.IWeatherView;
-import com.mvp.framework.utils.ListUtils;
-import com.mvp.framework.utils.LogUtil;
 
-import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * @ClassName: TestActivity
+ * @author create by Tang
+ * @date date 16/10/14 下午2:21
+ * @Description: 测试BaseActivity的效果
+ */
 
-public class MainActivity extends AppCompatActivity implements IWeatherView
+public class TestActivity extends BaseActivity implements IWeatherView
         ,INuoMiCategoryView,INuoMiShopInfoView {
-
-    private static final String TAG = "MainActivity";
 
     private Button weatherBtn;
     private Button nuoMiCategoryBtn;
     private Button nuoMiShopInfoBtn;
-    private Button testBtn;
+
 
     private WeatherPresenter presenter;
     private NuoMiCategoryPresenter nuoMiCategoryPresenter;
     private NuoMiShopInfoPresenter nuoMiShopInfoPresenter;
 
 
+    @NonNull
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
-
-        initView();
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        View view = inflater.inflate(R.layout.activity_test,container,false);
+        weatherBtn = (Button) view.findViewById(R.id.weather_btn);
+        nuoMiCategoryBtn = (Button) view.findViewById(R.id.nuo_mi_category_btn);
+        nuoMiShopInfoBtn = (Button) view.findViewById(R.id.nuo_mi_shop_info_btn);
 
         presenter = new WeatherPresenter(this);
         nuoMiCategoryPresenter = new NuoMiCategoryPresenter(this);
         nuoMiShopInfoPresenter = new NuoMiShopInfoPresenter(this);
 
-
-    }
-
-    private void initView(){
-        weatherBtn = (Button) findViewById(R.id.weather_btn);
-        nuoMiCategoryBtn = (Button) findViewById(R.id.nuo_mi_category_btn);
-        nuoMiShopInfoBtn = (Button) findViewById(R.id.nuo_mi_shop_info_btn);
-        testBtn = (Button) findViewById(R.id.go_test) ;
-
         weatherBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                setProgressType(PROGRESS_TYPE_DIALOG);
                 WeatherParams params = new WeatherParams();
                 params.cityname = "北京";
                 presenter.accessServer(params);
@@ -75,6 +69,7 @@ public class MainActivity extends AppCompatActivity implements IWeatherView
         nuoMiCategoryBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                setProgressType(PROGRESS_TYPE_DIALOG);
                 nuoMiCategoryPresenter.refresh(null);
             }
         });
@@ -83,39 +78,21 @@ public class MainActivity extends AppCompatActivity implements IWeatherView
         nuoMiShopInfoBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                setProgressType(PROGRESS_TYPE_DEFAULT);
                 NuoMiShopInfoParams params = new NuoMiShopInfoParams();
                 params.shop_id = "1745896";
                 nuoMiShopInfoPresenter.accessServer(params);
             }
         });
 
-        testBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(MainActivity.this, TestActivity.class);
-                startActivity(intent);
-            }
-        });
-
+        return view;
     }
 
-
+    @NonNull
     @Override
-    public void showProcess(boolean show) {
-
+    public boolean setDisplayHomeAsUpEnabled() {
+        return true;
     }
-
-    @Override
-    public void showVolleyError(int errorCode, String errorDesc, String apiInterface) {
-
-    }
-
-    @Override
-    public void showServerError(int errorCode, String errorDesc) {
-        LogUtil.e(MainActivity.class,"errorCode = " + errorCode + " & errorDesc = " + errorDesc);
-        Toast.makeText(this,errorDesc,Toast.LENGTH_SHORT).show();
-    }
-
 
     @Override
     public void showWeatherView(WeatherBean data) {

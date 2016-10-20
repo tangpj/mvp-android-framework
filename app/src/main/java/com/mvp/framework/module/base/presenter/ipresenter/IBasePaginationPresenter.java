@@ -30,11 +30,10 @@ public interface IBasePaginationPresenter<Params,Bean> extends IBasePresenter<Pa
      * @Method: refreshAssignPage
      * @author create by Tang
      * @date date 16/10/19 上午11:07
-     * @Description: 刷新指定页
-     * 只能对已经加载的数据执行此操作
-     * @param page 需要刷新的页面
+     * @Description: 刷新index所在页页面
+     * @param index 待刷新数据的位置
      */
-    void refreshAssignPage(int page);
+    void refreshIndexPage(int index);
 
     //设置一次取数据数量
     void setCount(int count);

@@ -18,6 +18,6 @@ public class ApiInterface {
     public static final String NUO_MI_CATEGOR = "/baidunuomi/openapi/categories";
 
     //获取糯米商家信息
-    public static final String NUO_MI_SHOP_INFO = "/baidunuomi/openapi/shopinfo?shop_id=1745896";
+    public static final String NUO_MI_SHOP_INFO = "/baidunuomi/openapi/shopinfo?shop_id=";
 
 }
