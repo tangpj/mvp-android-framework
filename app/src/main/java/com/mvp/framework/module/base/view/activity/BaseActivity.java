@@ -108,7 +108,7 @@ public abstract class BaseActivity extends AppCompatActivity implements IBaseAct
     }
 
     @Override
-    public void reconnection() {
+    public void onReconnection() {
         // 子类中如果需要处理重连事件的话，需要实现该方法
     }
 

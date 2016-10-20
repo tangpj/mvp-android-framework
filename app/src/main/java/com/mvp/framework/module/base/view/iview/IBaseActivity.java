@@ -35,7 +35,7 @@ public interface IBaseActivity extends IBaseView{
      * 需要确认获取数据失败的presenter
      * 具体需要根据实际业务来处理
      */
-    void reconnection();
+    void onReconnection();
 
     /**
      * @Method: setTitle
