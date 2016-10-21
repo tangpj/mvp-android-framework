@@ -44,4 +44,7 @@ public interface IBaseListActivity<Bean> extends IBaseView{
      * @Description: 设置列表数据
      */
     void setData(List<Bean> list);
+
+
+
 }
