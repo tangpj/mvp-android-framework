@@ -79,13 +79,13 @@ public abstract class BasePresenter<Params extends BaseParams,Data>
     @Override
     public void accessServer(Params params) {
         this.params = params;
-        baseView.showProcess(true);
+        baseView.showProgress(true);
         baseModel.sendRequestToServer();
     }
 
     @Override
     public void accessSucceed(JSONObject response) {
-        baseView.showProcess(false);
+        baseView.showProgress(false);
         Gson gson = new Gson();
         BaseResponse<Data> mResponse;
         if(clazz != null){
@@ -114,7 +114,7 @@ public abstract class BasePresenter<Params extends BaseParams,Data>
 
     @Override
     public void volleyError(int errorCode, String errorDesc, String apiInterface) {
-        baseView.showVolleyError(errorCode, errorDesc, apiInterface);
+        baseView.showNetworkError(errorCode, errorDesc, apiInterface);
     }
 
     @Override

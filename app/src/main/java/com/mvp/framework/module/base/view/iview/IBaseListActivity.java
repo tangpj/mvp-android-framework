@@ -10,7 +10,7 @@ import java.util.List;
  * @Bean: 列表数据项实体
  */
 
-public interface IBaseListActivity<Bean> extends IBaseView{
+public interface IBaseListActivity<Bean>{
 
     /**
      * @Method: refresh
@@ -26,7 +26,7 @@ public interface IBaseListActivity<Bean> extends IBaseView{
      * @date date 16/10/20 下午5:52
      * @Description: TODO
      */
-    void onLoaddingNextPage();
+    void onLoadingNextPage();
 
 
     /**
@@ -37,14 +37,12 @@ public interface IBaseListActivity<Bean> extends IBaseView{
      */
     void onRefreshIndexPage(int index);
 
+
     /**
      * @Method: setData
      * @author create by Tang
-     * @date date 16/10/20 下午5:56
-     * @Description: 设置列表数据
+     * @date date 16/10/24 下午6:09
+     * @Description: 设置数据
      */
-    void setData(List<Bean> list);
-
-
-
+    void setData(List<Bean> data);
 }

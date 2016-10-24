@@ -7,16 +7,11 @@ import android.support.design.widget.Snackbar;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.text.TextUtils;
-import android.util.Log;
-import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.FrameLayout;
-import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import com.mvp.framework.R;
@@ -24,7 +19,16 @@ import com.mvp.framework.module.base.view.iview.IBaseActivity;
 import com.mvp.framework.module.base.view.iview.IBaseView;
 import com.mvp.framework.utils.LogUtil;
 
-public abstract class BaseActivity extends AppCompatActivity implements IBaseActivity{
+
+/**
+ * @ClassName: BaseActivity
+ * @author create by Tang
+ * @date date 16/10/24 下午1:55
+ * @Description:
+ * 普通Activity基类
+ * 封装了Activity中相同的操作
+ */
+public abstract class BaseActivity extends AppCompatActivity implements IBaseActivity,IBaseView{
 
     public static final int PROGRESS_TYPE_DEFAULT = 1;
     public static final int PROGRESS_TYPE_DIALOG = 2;
@@ -123,7 +127,7 @@ public abstract class BaseActivity extends AppCompatActivity implements IBaseAct
     }
 
     @Override
-    public void showProcess(boolean show) {
+    public void showProgress(boolean show) {
         switch (progressType){
             case PROGRESS_TYPE_DEFAULT:
                 if (show){
@@ -149,9 +153,9 @@ public abstract class BaseActivity extends AppCompatActivity implements IBaseAct
     }
 
     @Override
-    public void showVolleyError(int errorCode, String errorDesc, String ApiInterface) {
+    public void showNetworkError(int errorCode, String errorDesc, String ApiInterface) {
         Toast.makeText(this,"网络错误",Toast.LENGTH_SHORT).show();
-        LogUtil.e(getClass(), "showVolleyError: " + ApiInterface);
+        LogUtil.e(getClass(), "showNetworkError: " + ApiInterface);
         contentView.setVisibility(View.GONE);
         errorLayout.setVisibility(View.VISIBLE);
     }

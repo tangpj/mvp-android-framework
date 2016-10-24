@@ -14,7 +14,7 @@ import android.view.ViewGroup;
  * @Description: Activity的基本处理
  */
 
-public interface IBaseActivity extends IBaseView{
+public interface IBaseActivity{
 
     /**
      * @Method: initView

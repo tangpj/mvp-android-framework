@@ -1,8 +1,5 @@
 package com.mvp.framework.module.base.presenter.ipresenter;
 
-import java.util.ArrayList;
-import java.util.List;
-
 /**
  * @ClassName: IBasePaginationPresenter
  * @author create by Tang
@@ -13,18 +10,11 @@ import java.util.List;
  */
 public interface IBasePaginationPresenter<Params,Bean> extends IBasePresenter<Params> {
 
-
-    //把服务器返回的数据添加到数据列表中
-    void addData(ArrayList<Bean> list);
-
-    //获取当前的数据
-    List<Bean> getData();
-
     //刷新全部数据
     void refresh(Params params);
 
-    //获取下一页数据
-    void getNextPage();
+    //加载下一页数据
+    void loading();
 
     /**
      * @Method: refreshAssignPage

@@ -1,6 +1,6 @@
 package com.mvp.framework.module.test.view.iview;
 
-import com.mvp.framework.module.base.view.iview.IBaseView;
+import com.mvp.framework.module.base.view.iview.IBasePaginationView;
 import com.mvp.framework.module.test.bean.NuoMiCategoryBean;
 
 import java.util.List;
@@ -12,7 +12,7 @@ import java.util.List;
  * @Description: TODO
  */
 
-public interface INuoMiCategoryView extends IBaseView{
+public interface INuoMiCategoryView extends IBasePaginationView {
 
     void showNuoMiCategoryView(List<NuoMiCategoryBean> nuoMiCategoryList);
 }

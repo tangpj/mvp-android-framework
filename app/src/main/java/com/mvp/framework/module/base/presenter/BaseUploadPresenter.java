@@ -38,21 +38,21 @@ public abstract class BaseUploadPresenter implements IBaseUploadPresenter {
 
     @Override
     public void accessServer(List<FileUploadParams> params) {
-        baseView.showProcess(true);
+        baseView.showProgress(true);
         this.params = params;
         uploadUploadModel.sendRequestToServer();
     }
 
     @Override
     public void accessSucceed(JSONObject response) {
-        baseView.showProcess(false);
+        baseView.showProgress(false);
         serverResponse(String.valueOf(response));
     }
 
 
     @Override
     public void volleyError(int errorCode, String errorDesc, String ApiInterface) {
-        baseView.showVolleyError(errorCode,errorDesc,ApiInterface);
+        baseView.showNetworkError(errorCode,errorDesc,ApiInterface);
     }
 
     @Override

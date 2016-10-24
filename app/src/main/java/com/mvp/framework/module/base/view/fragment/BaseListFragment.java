@@ -25,12 +25,12 @@ public class BaseListFragment extends Fragment implements IBaseView{
     }
 
     @Override
-    public void showProcess(boolean show) {
+    public void showProgress(boolean show) {
 
     }
 
     @Override
-    public void showVolleyError(int errorCode, String errorDesc, String ApiInterface) {
+    public void showNetworkError(int errorCode, String errorDesc, String ApiInterface) {
 
     }
 

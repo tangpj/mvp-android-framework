@@ -7,9 +7,9 @@ package com.mvp.framework.module.base.view.iview;
 public interface IBaseView {
 
     //网络回调的基本事件处理
-    void showProcess(final boolean show);
+    void showProgress(final boolean show);
 
-    void showVolleyError(int errorCode, String errorDesc, String ApiInterface);
+    void showNetworkError(int errorCode, String errorDesc, String ApiInterface);
 
     void showServerError(int errorCode, String errorDesc);
 

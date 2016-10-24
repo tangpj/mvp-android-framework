@@ -13,13 +13,14 @@ import com.mvp.framework.module.base.view.iview.IBaseView;
 
 public class BaseFragment extends Fragment implements IBaseView{
 
+
     @Override
-    public void showProcess(boolean show) {
+    public void showProgress(boolean show) {
 
     }
 
     @Override
-    public void showVolleyError(int errorCode, String errorDesc, String ApiInterface) {
+    public void showNetworkError(int errorCode, String errorDesc, String ApiInterface) {
 
     }
 

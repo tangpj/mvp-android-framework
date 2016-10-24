@@ -9,7 +9,9 @@ import com.mvp.framework.module.base.model.BaseModel;
 import com.mvp.framework.module.base.model.imodel.IBaseModel;
 import com.mvp.framework.module.base.params.BasePaginationParams;
 import com.mvp.framework.module.base.presenter.ipresenter.IBasePaginationPresenter;
+import com.mvp.framework.module.base.response.BasePaginationResponse;
 import com.mvp.framework.module.base.response.BaseResponse;
+import com.mvp.framework.module.base.view.iview.IBasePaginationView;
 import com.mvp.framework.module.base.view.iview.IBaseView;
 import com.mvp.framework.utils.ClassTypeUtil;
 import com.mvp.framework.utils.ListUtils;
@@ -36,7 +38,7 @@ public abstract class BasePaginationPresenter<Params extends BasePaginationParam
 
     public abstract void serverResponse(List<Bean> list);
 
-    private IBaseView baseView;
+    private IBasePaginationView baseView;
     private IBaseModel baseModel;
     private Params mParams;
 
@@ -61,7 +63,7 @@ public abstract class BasePaginationPresenter<Params extends BasePaginationParam
      * @Description: 构造方法
      * @param clazz 队列参数项的类型，不能为空
      */
-    protected BasePaginationPresenter(@NonNull IBaseView baseView,@NonNull Class<Bean> clazz){
+    protected BasePaginationPresenter(@NonNull IBasePaginationView baseView,@NonNull Class<Bean> clazz){
         this.baseView = baseView;
         this.baseModel = new BaseModel(this);
         this.clazz = clazz;
@@ -73,11 +75,11 @@ public abstract class BasePaginationPresenter<Params extends BasePaginationParam
     public void refresh(Params params) {
         this.mParams = params;
         dataList.clear();
-        getNextPage();
+        loading();
     }
 
     @Override
-    public void getNextPage() {
+    public void loading() {
         if (mParams == null){
             mParams = (Params) new BasePaginationParams();
             mParams.count = mCount;
@@ -96,7 +98,7 @@ public abstract class BasePaginationPresenter<Params extends BasePaginationParam
     public void refreshIndexPage(int index) {
         if (index > dataList.size()){
             //如果index超出数组长度则加载下一页
-            getNextPage();
+            loading();
         }else {
             /**
              * 注需要根据服务器实际情况来计算
@@ -122,15 +124,6 @@ public abstract class BasePaginationPresenter<Params extends BasePaginationParam
         this.mCount = count;
     }
 
-    @Override
-    public List getData() {
-        return dataList;
-    }
-
-    @Override
-    public void addData(ArrayList list) {
-    }
-
 
     @Override
     public Map setParams() {
@@ -152,7 +145,7 @@ public abstract class BasePaginationPresenter<Params extends BasePaginationParam
 
     @Override
     public void accessServer() {
-        baseView.showProcess(true);
+        baseView.showProgress(true);
         /**
          * 如果上一次请求没有完成，需要取消上次一次请求
          *  这样处理是为了防止获取的列表数据出错
@@ -178,11 +171,11 @@ public abstract class BasePaginationPresenter<Params extends BasePaginationParam
     @Override
     public void accessSucceed(JSONObject response) {
         String responseStr = String.valueOf(response);
-        baseView.showProcess(false);
-        ParameterizedType parameterized = ClassTypeUtil.type(BaseResponse.class
+        baseView.showProgress(false);
+        ParameterizedType parameterized = ClassTypeUtil.type(BasePaginationResponse.class
                 , ClassTypeUtil.type(List.class,clazz));
         Type type = $Gson$Types.canonicalize(parameterized);
-        BaseResponse<List<Bean>> mResponse = new Gson().fromJson(responseStr, type);
+        BasePaginationResponse<List<Bean>> mResponse = new Gson().fromJson(responseStr, type);
 
         if (mResponse.errNum == 0){
             if (mIndex < 0){
@@ -193,6 +186,7 @@ public abstract class BasePaginationPresenter<Params extends BasePaginationParam
                 ListUtils.replaceAssign(start,dataList,mResponse.data);
                 mIndex = -1;
             }
+            baseView.isNextPage(mResponse.nextPage);
             serverResponse(dataList);
         }else {
             baseView.showServerError(mResponse.errNum,mResponse.errMsg);
@@ -205,7 +199,7 @@ public abstract class BasePaginationPresenter<Params extends BasePaginationParam
 
     @Override
     public void volleyError(int errorCode, String errorDesc, String ApiInterface) {
-        baseView.showVolleyError(errorCode,errorDesc,ApiInterface);
+        baseView.showNetworkError(errorCode,errorDesc,ApiInterface);
     }
 
     @Override

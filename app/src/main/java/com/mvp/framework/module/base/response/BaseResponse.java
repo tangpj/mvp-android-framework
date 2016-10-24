@@ -7,9 +7,7 @@ import com.google.gson.annotations.SerializedName;
  * @ClassName: BaseResponse
  * @author create by Tang
  * @date date 16/8/22 下午3:55
- * @Description:
- * 基础返回数据处理类
- * 一些基础的返回处理可以放在这里
+ * @Description: 数据返回类，用于数据解析
  */
 public class BaseResponse<Data>{
 

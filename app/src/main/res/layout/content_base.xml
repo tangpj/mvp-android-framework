@@ -40,7 +40,7 @@
             android:id="@+id/base_error_text"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="网络连接错误"/>
+            android:text="网络连接错误,点击从新连接"/>
 
     </LinearLayout>
 

@@ -1,5 +1,6 @@
 package com.mvp.framework.module.test.view.activity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.view.LayoutInflater;
@@ -32,7 +33,7 @@ import java.util.List;
  */
 
 public class TestActivity extends BaseActivity implements IWeatherView
-        ,INuoMiCategoryView,INuoMiShopInfoView {
+        ,INuoMiShopInfoView {
 
     private Button weatherBtn;
     private Button nuoMiCategoryBtn;
@@ -40,7 +41,6 @@ public class TestActivity extends BaseActivity implements IWeatherView
 
 
     private WeatherPresenter presenter;
-    private NuoMiCategoryPresenter nuoMiCategoryPresenter;
     private NuoMiShopInfoPresenter nuoMiShopInfoPresenter;
 
 
@@ -53,7 +53,6 @@ public class TestActivity extends BaseActivity implements IWeatherView
         nuoMiShopInfoBtn = (Button) view.findViewById(R.id.nuo_mi_shop_info_btn);
 
         presenter = new WeatherPresenter(this);
-        nuoMiCategoryPresenter = new NuoMiCategoryPresenter(this);
         nuoMiShopInfoPresenter = new NuoMiShopInfoPresenter(this);
 
         weatherBtn.setOnClickListener(new View.OnClickListener() {
@@ -69,8 +68,8 @@ public class TestActivity extends BaseActivity implements IWeatherView
         nuoMiCategoryBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                setProgressType(PROGRESS_TYPE_DIALOG);
-                nuoMiCategoryPresenter.refresh(null);
+                Intent intent = new Intent(TestActivity.this,NuomiCategoryActivity.class);
+                startActivity(intent);
             }
         });
 
@@ -99,12 +98,6 @@ public class TestActivity extends BaseActivity implements IWeatherView
         Toast.makeText(this,data.weather,Toast.LENGTH_SHORT).show();
     }
 
-    @Override
-    public void showNuoMiCategoryView(List<NuoMiCategoryBean> nuoMiCategoryList) {
-        Toast.makeText(this,"成功,第一个分类为："
-                + nuoMiCategoryList.get(0).cat_name,Toast.LENGTH_SHORT).show();
-
-    }
 
     @Override
     public void showNuoMiShopInfoView(NuoMiShopInfoBean nuoMiShopInfo) {
