@@ -13,20 +13,6 @@
     tools:context="com.mvp.framework.module.base.view.activity.BaseListActivity"
     tools:showIn="@layout/activity_base_list">
 
-    <android.support.v4.widget.SwipeRefreshLayout
-        android:id="@+id/base_refresh_layout"
-        android:orientation="vertical"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
-
-        <android.support.v7.widget.RecyclerView
-            android:id="@+id/base_recycler_view"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"/>
-
-    </android.support.v4.widget.SwipeRefreshLayout>
-
-
 
     <LinearLayout
         android:id="@+id/base_error_layout"
@@ -49,5 +35,18 @@
             android:text="网络连接错误"/>
 
     </LinearLayout>
+
+    <android.support.v4.widget.SwipeRefreshLayout
+        android:id="@+id/base_refresh_layout"
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/base_recycler_view"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"/>
+
+    </android.support.v4.widget.SwipeRefreshLayout>
 
 </FrameLayout>

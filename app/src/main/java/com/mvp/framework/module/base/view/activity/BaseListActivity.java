@@ -1,6 +1,9 @@
 package com.mvp.framework.module.base.view.activity;
 
+import android.os.Build;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
+import android.support.annotation.RequiresApi;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v4.widget.SwipeRefreshLayout;
@@ -11,8 +14,14 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.StaggeredGridLayoutManager;
 import android.support.v7.widget.Toolbar;
+import android.text.TextUtils;
+import android.util.Log;
 import android.util.TypedValue;
+import android.view.MenuItem;
 import android.view.View;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.TextView;
 
 import com.mvp.framework.R;
 import com.mvp.framework.module.base.params.BasePaginationParams;
@@ -34,6 +43,8 @@ import java.util.List;
 public abstract class BaseListActivity<Bean> extends AppCompatActivity
         implements IBaseListActivity<Bean>,IBasePaginationView {
 
+    private final static String TAG = "BaseListActivity";
+
     private Toolbar toolbar;
     private FloatingActionButton fab;
     private ActionBar ab;
@@ -45,6 +56,12 @@ public abstract class BaseListActivity<Bean> extends AppCompatActivity
     private int lastVisibleItem;
     private int[] lastPositions;
 
+
+    //错误显示View
+    private LinearLayout errorLayout;
+    private ImageView errorImage;
+    private TextView errorText;
+
     //如果有下一页nextPage大于0
     private int nextPage;
 
@@ -53,32 +70,18 @@ public abstract class BaseListActivity<Bean> extends AppCompatActivity
     //需要替换的layoutId
     private int mLayoutId = 0;
 
-    /**
-     * @Method: findMax
-     * @author create by Tang
-     * @date date 16/10/24 下午3:48
-     * @Description: 用于查找int数组中最大的数
-     */
-    private int findMax(int[] lastPositions) {
-        int max = lastPositions[0];
-        for (int value : lastPositions) {
-            if (value > max) {
-                max = value;
-            }
-        }
-        return max;
-    }
 
-    public void setMContentView(int layoutId){
-        this.mLayoutId = layoutId;
-    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_base_list);
+        if (mLayoutId != 0){
+            setContentView(mLayoutId);
+        }else {
+            setContentView(R.layout.activity_base_list);
+        }
         presenter = setPresenter();
-        initBaseView();
+        onCreate();
 
         //自动刷新
         baseRefreshLayout.setProgressViewOffset(false, 0, (int) TypedValue
@@ -88,14 +91,140 @@ public abstract class BaseListActivity<Bean> extends AppCompatActivity
 
     }
 
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()){
+            case android.R.id.home:
+                finish();
+                break;
+        }
+        return super.onOptionsItemSelected(item);
+    }
+
+
+    @Override
+    public void onCreate() {
+        initBaseView();
+        // 子类需要初始化的话需要覆盖此类
+    }
+
+    @Override
+    public void onRefresh() {
+        presenter.refresh(setParams());
+    }
+
+    @Override
+    public void onLoadingNextPage() {
+        presenter.loading();
+    }
+
+    @Override
+    public void onRefreshIndexPage(int index) {
+        presenter.refreshIndexPage(index);
+    }
+
+    @Override
+    public void setData(List<Bean> data) {
+        if (errorLayout.getVisibility() == View.VISIBLE){
+            errorLayout.setVisibility(View.GONE);
+        }
+        adapter.setData(data);
+    }
+
+    @Override
+    public void setTitle(String title) {
+        ab.setTitle(title);
+    }
+
+    @NonNull
+    @Override
+    public boolean setDisplayHomeAsUpEnabled() {
+        return true;
+    }
+
+    @Override
+    public FloatingActionButton getFloatingActionButton() {
+        return fab;
+    }
+
+    @Override
+    public int setErrorImageResource() {
+        return 0;
+    }
+
+    @Override
+    public String setErrorString() {
+        return null;
+    }
+
+    @Override
+    public void isNextPage(int nextPage) {
+        this.nextPage = nextPage;
+    }
+
+    @Override
+    public void showProgress(boolean show) {
+        baseRefreshLayout.setRefreshing(show);
+    }
+
+    @Override
+    public void showNetworkError(int errorCode, String errorDesc, String ApiInterface) {
+        showProgress(false);
+        if (adapter.getData().size() > 0){
+            Snackbar.make(fab,"请检查网络连接",Snackbar.LENGTH_SHORT).show();
+            return;
+        }
+
+        errorLayout.setVisibility(View.VISIBLE);
+        adapter.notifyDataSetChanged();
+        if (setErrorImageResource() != 0){
+            errorImage.setImageResource(setErrorImageResource());
+        }
+
+        if (!TextUtils.isEmpty(setErrorString())){
+            errorText.setText(setErrorString());
+        }
+    }
+
+    @Override
+    public void showServerError(int errorCode, String errorDesc) {
+        showProgress(false);
+        if (adapter.getData().size() > 0){
+            Snackbar.make(fab,errorDesc,Snackbar.LENGTH_SHORT).show();
+            return;
+        }
+
+        errorLayout.setVisibility(View.VISIBLE);
+        if (setErrorImageResource() != 0){
+            errorImage.setImageResource(setErrorImageResource());
+        }
+
+        if (!TextUtils.isEmpty(errorDesc)){
+            errorText.setText(errorDesc);
+        }
+    }
+
+
+
+    /**
+     * @Method: initBaseView
+     * @author create by Tang
+     * @date date 16/10/25 下午4:38
+     * @Description: 初始化View
+     */
     private void initBaseView(){
         toolbar = (Toolbar) findViewById(R.id.toolbar);
         fab = (FloatingActionButton) findViewById(R.id.fab);
         baseRecyclerView = (RecyclerView) findViewById(R.id.base_recycler_view) ;
         baseRefreshLayout = (SwipeRefreshLayout) findViewById(R.id.base_refresh_layout);
 
+        errorLayout = (LinearLayout) findViewById(R.id.base_error_layout);
+        errorImage = (ImageView) findViewById(R.id.base_error_img);
+        errorText = (TextView) findViewById(R.id.base_error_text);
+
         setSupportActionBar(toolbar);
         ab = getSupportActionBar();
+        ab.setDisplayHomeAsUpEnabled(setDisplayHomeAsUpEnabled());
 
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -132,9 +261,9 @@ public abstract class BaseListActivity<Bean> extends AppCompatActivity
                             = (StaggeredGridLayoutManager) layoutManager;
                     if (lastPositions == null){
                         lastPositions = new int[staggeredGridLayoutManager.getSpanCount()];
-                        staggeredGridLayoutManager.findLastVisibleItemPositions(lastPositions);
-                        lastVisibleItem = findMax(lastPositions);
                     }
+                    staggeredGridLayoutManager.findLastVisibleItemPositions(lastPositions);
+                    lastVisibleItem = findMax(lastPositions);
                 }
             }
         });
@@ -150,46 +279,37 @@ public abstract class BaseListActivity<Bean> extends AppCompatActivity
 
     }
 
-    @Override
-    public void onRefresh() {
-        presenter.refresh(setParams());
+    /**
+     * @Method: findMax
+     * @author create by Tang
+     * @date date 16/10/24 下午3:48
+     * @Description: 用于查找int数组中最大的数
+     */
+    private int findMax(int[] lastPositions) {
+        int max = lastPositions[0];
+        for (int value : lastPositions) {
+            if (value > max) {
+                max = value;
+            }
+        }
+        return max;
     }
 
-    @Override
-    public void onLoadingNextPage() {
-        presenter.loading();
+    /**
+     * @Method: reSetContentView
+     * @author create by Tang
+     * @date date 16/10/25 上午9:51
+     * @Description: 重新设置ContentView,新设置的ContentView中的id必须要和activity_base_list中的至
+     */
+    public void reSetContentView(int layoutId){
+        this.mLayoutId = layoutId;
     }
 
-    @Override
-    public void onRefreshIndexPage(int index) {
-        presenter.refreshIndexPage(index);
-    }
 
-    @Override
-    public void setData(List<Bean> data) {
-        adapter.setData(data);
-    }
-
-    @Override
-    public void isNextPage(int nextPage) {
-        this.nextPage = nextPage;
-    }
-
-    @Override
-    public void showProgress(boolean show) {
-        baseRefreshLayout.setRefreshing(show);
-    }
-
-    @Override
-    public void showNetworkError(int errorCode, String errorDesc, String ApiInterface) {
-
-    }
-
-    @Override
-    public void showServerError(int errorCode, String errorDesc) {
-
-    }
-
+    /**
+     * 抽象方法，子必须实现setLayoutManager()、setAdapter()、setPresenter()方法
+     * setParams()可以返回空
+     */
     public abstract RecyclerView.LayoutManager setLayoutManager();
 
     public abstract BaseListAdapter setAdapter();

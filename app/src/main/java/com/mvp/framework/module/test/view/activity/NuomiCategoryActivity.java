@@ -2,6 +2,8 @@ package com.mvp.framework.module.test.view.activity;
 
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.StaggeredGridLayoutManager;
+import android.util.Log;
 
 import com.mvp.framework.module.base.params.BasePaginationParams;
 import com.mvp.framework.module.base.presenter.BasePaginationPresenter;
@@ -22,10 +24,17 @@ import java.util.List;
  */
 public class NuomiCategoryActivity extends BaseListActivity<NuoMiCategoryBean> implements INuoMiCategoryView{
 
+    private static final String TAG =  "NuomiCategoryActivity";
+
+    @Override
+    public void onCreate() {
+        super.onCreate();
+        setTitle("糯米分类");
+    }
 
     @Override
     public RecyclerView.LayoutManager setLayoutManager() {
-        return new LinearLayoutManager(this);
+        return new StaggeredGridLayoutManager(3,StaggeredGridLayoutManager.VERTICAL);
     }
 
     @Override
@@ -35,6 +44,7 @@ public class NuomiCategoryActivity extends BaseListActivity<NuoMiCategoryBean> i
 
     @Override
     public BasePaginationPresenter setPresenter() {
+        Log.d(TAG, "setPresenter: " );
         return new NuoMiCategoryPresenter(this);
     }
 

@@ -42,7 +42,8 @@ public abstract class BaseListAdapter<Data> extends RecyclerView.Adapter<Recycle
 
 
     public void setData(List<Data> data){
-        this.mData = data;
+        mData.clear();
+        mData.addAll(data);
         notifyDataSetChanged();
     }
 

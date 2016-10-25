@@ -2,6 +2,7 @@ package com.mvp.framework.module.base.view.activity;
 
 import android.app.ProgressDialog;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.ActionBar;
@@ -75,7 +76,6 @@ public abstract class BaseActivity extends AppCompatActivity implements IBaseAct
 
         setSupportActionBar(toolbar);
         ab = getSupportActionBar();
-
         ab.setDisplayHomeAsUpEnabled(setDisplayHomeAsUpEnabled());
 
         fab.setOnClickListener(new View.OnClickListener() {
@@ -124,6 +124,12 @@ public abstract class BaseActivity extends AppCompatActivity implements IBaseAct
     @Override
     public void setProgressType(int progressType) {
         this.progressType = progressType;
+    }
+
+    @NonNull
+    @Override
+    public boolean setDisplayHomeAsUpEnabled() {
+        return true;
     }
 
     @Override

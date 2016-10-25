@@ -84,14 +84,11 @@ public class TestActivity extends BaseActivity implements IWeatherView
             }
         });
 
+        setTitle("测试11");
+
         return view;
     }
 
-    @NonNull
-    @Override
-    public boolean setDisplayHomeAsUpEnabled() {
-        return true;
-    }
 
     @Override
     public void showWeatherView(WeatherBean data) {

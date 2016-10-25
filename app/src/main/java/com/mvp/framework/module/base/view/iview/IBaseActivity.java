@@ -43,9 +43,18 @@ public interface IBaseActivity{
      * @date date 16/10/20 上午11:06
      * @Description: 设置页面标题
      */
-    void setTitle(@NonNull String title);
+    void setTitle(String title);
 
-    void setProgressType(int type);
+    /**
+     * @Method: setProgressType
+     * @author create by Tang
+     * @date date 16/10/25 上午10:54
+     * @Description:
+     * 设置加载进度的样式
+     * 初始化为默认模式，
+     * 在子类中调用该方法可以重设进度条的样式
+     */
+    void setProgressType(int progressType);
 
     /**
      * @Method: setDisplayHomeAsUpEnabled
