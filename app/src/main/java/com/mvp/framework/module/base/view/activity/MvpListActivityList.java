@@ -1,9 +1,7 @@
 package com.mvp.framework.module.base.view.activity;
 
-import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
-import android.support.annotation.RequiresApi;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v4.widget.SwipeRefreshLayout;
@@ -15,7 +13,6 @@ import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.StaggeredGridLayoutManager;
 import android.support.v7.widget.Toolbar;
 import android.text.TextUtils;
-import android.util.Log;
 import android.util.TypedValue;
 import android.view.MenuItem;
 import android.view.View;
@@ -27,23 +24,23 @@ import com.mvp.framework.R;
 import com.mvp.framework.module.base.params.BasePaginationParams;
 import com.mvp.framework.module.base.presenter.BasePaginationPresenter;
 import com.mvp.framework.module.base.view.adapter.BaseListAdapter;
-import com.mvp.framework.module.base.view.iview.IBaseListActivity;
-import com.mvp.framework.module.base.view.iview.IBasePaginationView;
+import com.mvp.framework.module.base.view.iview.IMvpListActivity;
+import com.mvp.framework.module.base.view.iview.IMvpListView;
+import com.mvp.framework.module.base.view.iview.IResetErrorInfo;
+import com.mvp.framework.utils.LogUtil;
 
 import java.util.List;
 
 /**
- * @ClassName: BaseListActivity
+ * @ClassName: MvpListActivityList
  * @author create by Tang
  * @date date 16/10/24 下午1:55
  * @Description:
  * 列表型Activity基类
- * 列表型的Activity可继承该基类
+ * 获取列表型数据的Activity继承该类可以实现自动处理大部分数据
  */
-public abstract class BaseListActivity<Bean> extends AppCompatActivity
-        implements IBaseListActivity<Bean>,IBasePaginationView {
-
-    private final static String TAG = "BaseListActivity";
+public abstract class MvpListActivityList<Bean> extends AppCompatActivity
+        implements IMvpListActivity<Bean>,IMvpListView,IResetErrorInfo {
 
     private Toolbar toolbar;
     private FloatingActionButton fab;
@@ -78,7 +75,7 @@ public abstract class BaseListActivity<Bean> extends AppCompatActivity
         if (mLayoutId != 0){
             setContentView(mLayoutId);
         }else {
-            setContentView(R.layout.activity_base_list);
+            setContentView(R.layout.activity_mvp_list);
         }
         presenter = setPresenter();
         onCreate();
@@ -169,41 +166,43 @@ public abstract class BaseListActivity<Bean> extends AppCompatActivity
 
     @Override
     public void showNetworkError(int errorCode, String errorDesc, String ApiInterface) {
-        showProgress(false);
-        if (adapter.getData().size() > 0){
-            Snackbar.make(fab,"请检查网络连接",Snackbar.LENGTH_SHORT).show();
-            return;
-        }
-
-        errorLayout.setVisibility(View.VISIBLE);
-        adapter.notifyDataSetChanged();
-        if (setErrorImageResource() != 0){
-            errorImage.setImageResource(setErrorImageResource());
-        }
-
-        if (!TextUtils.isEmpty(setErrorString())){
-            errorText.setText(setErrorString());
-        }
+        onError(errorCode,errorDesc);
     }
 
     @Override
     public void showServerError(int errorCode, String errorDesc) {
+        onError(errorCode,errorDesc);
+    }
+
+    @Override
+    public void onError(int errorCode, String errorDesc) {
+        LogUtil.e(getClass(),"showServerError: error code = "
+                + errorCode + " & error desc = " + errorDesc );
         showProgress(false);
         if (adapter.getData().size() > 0){
-            Snackbar.make(fab,errorDesc,Snackbar.LENGTH_SHORT).show();
+            if (!TextUtils.isEmpty(setErrorString())){
+
+                Snackbar.make(fab,setErrorString(),Snackbar.LENGTH_SHORT).show();
+
+            }else {
+                Snackbar.make(fab,errorDesc,Snackbar.LENGTH_SHORT).show();
+
+            }
             return;
         }
 
-        errorLayout.setVisibility(View.VISIBLE);
         if (setErrorImageResource() != 0){
-            errorImage.setImageResource(setErrorImageResource());
+            errorImage.setImageDrawable(getResources().getDrawable(setErrorImageResource()));
         }
 
-        if (!TextUtils.isEmpty(errorDesc)){
+        if (!TextUtils.isEmpty(setErrorString())){
+            errorText.setText(setErrorString());
+        }else {
             errorText.setText(errorDesc);
         }
-    }
+        errorLayout.setVisibility(View.VISIBLE);
 
+    }
 
 
     /**
@@ -272,7 +271,7 @@ public abstract class BaseListActivity<Bean> extends AppCompatActivity
         baseRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
-                BaseListActivity.this.onRefresh();
+                MvpListActivityList.this.onRefresh();
             }
         });
 

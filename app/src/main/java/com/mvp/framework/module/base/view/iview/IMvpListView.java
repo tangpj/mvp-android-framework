@@ -1,14 +1,12 @@
 package com.mvp.framework.module.base.view.iview;
 
-import java.util.List;
-
 /**
- * @ClassName: IBasePaginationView
+ * @ClassName: IMvpListView
  * @author create by Tang
  * @date date 16/10/24 下午4:53
  * @Description: TODO
  */
-public interface IBasePaginationView extends IBaseView{
+public interface IMvpListView extends IBaseMvpView {
 
     /**
      * @Method: isNextPage

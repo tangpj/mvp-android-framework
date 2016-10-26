@@ -4,7 +4,7 @@ import com.mvp.framework.config.ApiInterface;
 import com.mvp.framework.module.base.presenter.BasePresenter;
 import com.mvp.framework.module.test.bean.WeatherBean;
 import com.mvp.framework.module.test.params.WeatherParams;
-import com.mvp.framework.module.test.view.iview.IWeatherView;
+import com.mvp.framework.module.test.view.iview.IWeatherMvpView;
 
 /**
  * @ClassName: WeatherPresenter
@@ -14,9 +14,9 @@ import com.mvp.framework.module.test.view.iview.IWeatherView;
  */
 public class WeatherPresenter extends BasePresenter<WeatherParams,WeatherBean> {
 
-    private IWeatherView weatherView;
+    private IWeatherMvpView weatherView;
 
-    public WeatherPresenter(IWeatherView weatherView) {
+    public WeatherPresenter(IWeatherMvpView weatherView) {
         super(weatherView,WeatherBean.class);
         this.weatherView = weatherView;
         getModel().setApiInterface(ApiInterface.WEATER);

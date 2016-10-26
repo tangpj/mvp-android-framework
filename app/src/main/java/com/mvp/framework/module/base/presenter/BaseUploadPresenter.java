@@ -4,7 +4,7 @@ import com.mvp.framework.module.base.model.BaseUploadModel;
 import com.mvp.framework.module.base.model.imodel.IBaseModel;
 import com.mvp.framework.module.base.params.FileUploadParams;
 import com.mvp.framework.module.base.presenter.ipresenter.IBaseUploadPresenter;
-import com.mvp.framework.module.base.view.iview.IBaseView;
+import com.mvp.framework.module.base.view.iview.IBaseMvpView;
 
 
 import org.json.JSONObject;
@@ -21,11 +21,11 @@ public abstract class BaseUploadPresenter implements IBaseUploadPresenter {
 
     public abstract void serverResponse(String response) ;
 
-    private IBaseView baseView;
+    private IBaseMvpView baseView;
     private IBaseModel uploadUploadModel;
     private List<FileUploadParams> params;
 
-    protected BaseUploadPresenter(IBaseView baseView){
+    protected BaseUploadPresenter(IBaseMvpView baseView){
 
         this.baseView = baseView;
         this.uploadUploadModel = new BaseUploadModel(this);

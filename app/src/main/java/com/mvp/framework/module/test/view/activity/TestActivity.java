@@ -10,20 +10,14 @@ import android.widget.Button;
 import android.widget.Toast;
 
 import com.mvp.framework.R;
-import com.mvp.framework.module.base.view.activity.BaseActivity;
-import com.mvp.framework.module.test.bean.NuoMiCategoryBean;
+import com.mvp.framework.module.base.view.activity.MvpActivity;
 import com.mvp.framework.module.test.bean.NuoMiShopInfoBean;
 import com.mvp.framework.module.test.bean.WeatherBean;
 import com.mvp.framework.module.test.params.NuoMiShopInfoParams;
-import com.mvp.framework.module.test.params.WeatherParams;
-import com.mvp.framework.module.test.presenter.NuoMiCategoryPresenter;
 import com.mvp.framework.module.test.presenter.NuoMiShopInfoPresenter;
 import com.mvp.framework.module.test.presenter.WeatherPresenter;
-import com.mvp.framework.module.test.view.iview.INuoMiCategoryView;
-import com.mvp.framework.module.test.view.iview.INuoMiShopInfoView;
-import com.mvp.framework.module.test.view.iview.IWeatherView;
-
-import java.util.List;
+import com.mvp.framework.module.test.view.iview.INuoMiShopInfoMvpView;
+import com.mvp.framework.module.test.view.iview.IWeatherMvpView;
 
 /**
  * @ClassName: TestActivity
@@ -32,16 +26,11 @@ import java.util.List;
  * @Description: 测试BaseActivity的效果
  */
 
-public class TestActivity extends BaseActivity implements IWeatherView
-        ,INuoMiShopInfoView {
+public class TestActivity extends MvpActivity implements INuoMiShopInfoMvpView {
 
     private Button weatherBtn;
     private Button nuoMiCategoryBtn;
     private Button nuoMiShopInfoBtn;
-
-
-    private WeatherPresenter presenter;
-    private NuoMiShopInfoPresenter nuoMiShopInfoPresenter;
 
 
     @NonNull
@@ -52,16 +41,11 @@ public class TestActivity extends BaseActivity implements IWeatherView
         nuoMiCategoryBtn = (Button) view.findViewById(R.id.nuo_mi_category_btn);
         nuoMiShopInfoBtn = (Button) view.findViewById(R.id.nuo_mi_shop_info_btn);
 
-        presenter = new WeatherPresenter(this);
-        nuoMiShopInfoPresenter = new NuoMiShopInfoPresenter(this);
-
         weatherBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                setProgressType(PROGRESS_TYPE_DIALOG);
-                WeatherParams params = new WeatherParams();
-                params.cityname = "北京";
-                presenter.accessServer(params);
+                Intent intent = new Intent(TestActivity.this,WeatherActivity.class);
+                startActivity(intent);
             }
         });
 
@@ -77,10 +61,12 @@ public class TestActivity extends BaseActivity implements IWeatherView
         nuoMiShopInfoBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                setProgressType(PROGRESS_TYPE_DEFAULT);
-                NuoMiShopInfoParams params = new NuoMiShopInfoParams();
-                params.shop_id = "1745896";
-                nuoMiShopInfoPresenter.accessServer(params);
+                setProgressType(PROGRESS_TYPE_DROP_DOWN);
+//                NuoMiShopInfoParams params = new NuoMiShopInfoParams();
+//                params.shop_id = "1745896";
+
+                Intent intent = new Intent(TestActivity.this,NuoMiShopInfoActivity.class);
+                startActivity(intent);
             }
         });
 
@@ -89,10 +75,9 @@ public class TestActivity extends BaseActivity implements IWeatherView
         return view;
     }
 
-
     @Override
-    public void showWeatherView(WeatherBean data) {
-        Toast.makeText(this,data.weather,Toast.LENGTH_SHORT).show();
+    public void onReconnection() {
+        super.onReconnection();
     }
 
 

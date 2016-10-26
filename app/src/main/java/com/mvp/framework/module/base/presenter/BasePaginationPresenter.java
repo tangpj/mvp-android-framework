@@ -10,9 +10,7 @@ import com.mvp.framework.module.base.model.imodel.IBaseModel;
 import com.mvp.framework.module.base.params.BasePaginationParams;
 import com.mvp.framework.module.base.presenter.ipresenter.IBasePaginationPresenter;
 import com.mvp.framework.module.base.response.BasePaginationResponse;
-import com.mvp.framework.module.base.response.BaseResponse;
-import com.mvp.framework.module.base.view.iview.IBasePaginationView;
-import com.mvp.framework.module.base.view.iview.IBaseView;
+import com.mvp.framework.module.base.view.iview.IMvpListView;
 import com.mvp.framework.utils.ClassTypeUtil;
 import com.mvp.framework.utils.ListUtils;
 
@@ -38,7 +36,7 @@ public abstract class BasePaginationPresenter<Params extends BasePaginationParam
 
     public abstract void serverResponse(List<Bean> list);
 
-    private IBasePaginationView baseView;
+    private IMvpListView baseView;
     private IBaseModel baseModel;
     private Params mParams;
 
@@ -63,7 +61,7 @@ public abstract class BasePaginationPresenter<Params extends BasePaginationParam
      * @Description: 构造方法
      * @param clazz 队列参数项的类型，不能为空
      */
-    protected BasePaginationPresenter(@NonNull IBasePaginationView baseView,@NonNull Class<Bean> clazz){
+    protected BasePaginationPresenter(@NonNull IMvpListView baseView, @NonNull Class<Bean> clazz){
         this.baseView = baseView;
         this.baseModel = new BaseModel(this);
         this.clazz = clazz;

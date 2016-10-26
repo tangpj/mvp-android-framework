@@ -6,14 +6,14 @@ import android.support.design.widget.FloatingActionButton;
 import java.util.List;
 
 /**
- * @ClassName: IBaseListActivity
+ * @ClassName: IMvpListActivity
  * @author create by Tang
  * @date date 16/10/20 下午5:47
  * @Description: 列表型Activity接口
  * @Bean: 列表数据项实体
  */
 
-public interface IBaseListActivity<Bean>{
+public interface IMvpListActivity<Bean> extends IActivity{
 
 
     /**
@@ -58,40 +58,4 @@ public interface IBaseListActivity<Bean>{
      */
     void setData(List<Bean> data);
 
-
-    /**
-     * @Method: setTitle
-     * @author create by Tang
-     * @date date 16/10/25 上午9:47
-     * @Description: 设置页面标题
-     */
-    void setTitle(String title);
-
-
-    /**
-     * @Method: setDisplayHomeAsUpEnabled
-     * @author create by Tang
-     * @date date 16/10/25 上午9:48
-     * @Description: ActionBar上是否显示返回按钮
-     */
-    @NonNull
-    boolean setDisplayHomeAsUpEnabled();
-
-    FloatingActionButton getFloatingActionButton();
-
-    /**
-     * @Method: setErrorImage
-     * @author create by Tang
-     * @date date 16/10/25 下午4:44
-     * @Description: 设置错误显示图片
-     */
-    int setErrorImageResource();
-
-    /**
-     * @Method: setErrorString
-     * @author create by Tang
-     * @date date 16/10/25 下午4:45
-     * @Description: 设置错误显示信息
-     */
-    String setErrorString();
 }

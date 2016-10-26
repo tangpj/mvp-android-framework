@@ -7,21 +7,25 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.mvp.framework.module.base.view.iview.IBaseView;
+import com.mvp.framework.R;
+import com.mvp.framework.module.base.view.iview.IBaseMvpView;
 
 /**
- * @ClassName: BaseListFragment
+ * @ClassName: MvpFragment
  * @author create by Tang
  * @date date 16/10/20 上午10:38
- * @Description: 列表型Fragment需继承此类
+ * @Description: 基础的Fragment需继承此类
  */
 
-public class BaseListFragment extends Fragment implements IBaseView{
+public class MvpFragment extends Fragment implements IBaseMvpView {
+
 
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        return super.onCreateView(inflater, container, savedInstanceState);
+        View contentView = inflater.inflate(R.layout.fragment_mvp,container,false);
+        initView(contentView);
+        return contentView;
     }
 
     @Override
@@ -38,4 +42,11 @@ public class BaseListFragment extends Fragment implements IBaseView{
     public void showServerError(int errorCode, String errorDesc) {
 
     }
+
+    private void initView(View view){
+
+
+    }
+
+
 }

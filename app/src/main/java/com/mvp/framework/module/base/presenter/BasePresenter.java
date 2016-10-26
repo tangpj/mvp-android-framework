@@ -7,7 +7,8 @@ import com.mvp.framework.module.base.model.imodel.IBaseModel;
 import com.mvp.framework.module.base.params.BaseParams;
 import com.mvp.framework.module.base.presenter.ipresenter.IBasePresenter;
 import com.mvp.framework.module.base.response.BaseResponse;
-import com.mvp.framework.module.base.view.iview.IBaseView;
+import com.mvp.framework.module.base.view.iview.IBaseMvpView;
+import com.mvp.framework.module.base.view.iview.IMvpView;
 import com.mvp.framework.utils.ClassTypeUtil;
 
 
@@ -32,7 +33,7 @@ public abstract class BasePresenter<Params extends BaseParams,Data>
     public abstract void serverResponse(Data data);
 
     private IBaseModel baseModel;
-    private IBaseView baseView;
+    private IMvpView mvpView;
     private Params params;
     private Class<Data> clazz;
 
@@ -43,8 +44,8 @@ public abstract class BasePresenter<Params extends BaseParams,Data>
      * @date date 16/10/14 下午5:32
      * @Description: BaseResponse中Data为空使用该构造方法
      */
-    public BasePresenter(IBaseView baseView) {
-        this.baseView = baseView;
+    public BasePresenter(IMvpView mvpView) {
+        this.mvpView = mvpView;
         this.baseModel = new BaseModel(this);
     }
 
@@ -55,8 +56,8 @@ public abstract class BasePresenter<Params extends BaseParams,Data>
      * @date date 16/10/14 下午5:32
      * @Description: BaseResponse中Data不为空使用该构造方法
      */
-    public BasePresenter(IBaseView baseView, Class<Data> clazz) {
-        this.baseView = baseView;
+    public BasePresenter(IMvpView mvpView, Class<Data> clazz) {
+        this.mvpView = mvpView;
         this.baseModel = new BaseModel(this);
         this.clazz = clazz;
     }
@@ -79,13 +80,13 @@ public abstract class BasePresenter<Params extends BaseParams,Data>
     @Override
     public void accessServer(Params params) {
         this.params = params;
-        baseView.showProgress(true);
+        mvpView.showProgress(true);
         baseModel.sendRequestToServer();
     }
 
     @Override
     public void accessSucceed(JSONObject response) {
-        baseView.showProgress(false);
+        mvpView.showProgress(false);
         Gson gson = new Gson();
         BaseResponse<Data> mResponse;
         if(clazz != null){
@@ -106,15 +107,16 @@ public abstract class BasePresenter<Params extends BaseParams,Data>
 
         if (mResponse.errNum == 0) {
             serverResponse(mResponse.data);
+            mvpView.showSucceed(true);
         } else {
-            baseView.showServerError(mResponse.errNum, mResponse.errMsg);
+            mvpView.showServerError(mResponse.errNum, mResponse.errMsg);
         }
     }
 
 
     @Override
     public void volleyError(int errorCode, String errorDesc, String apiInterface) {
-        baseView.showNetworkError(errorCode, errorDesc, apiInterface);
+        mvpView.showNetworkError(errorCode, errorDesc, apiInterface);
     }
 
     @Override

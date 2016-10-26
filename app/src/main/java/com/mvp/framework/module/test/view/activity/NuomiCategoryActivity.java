@@ -1,18 +1,17 @@
 package com.mvp.framework.module.test.view.activity;
 
-import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.StaggeredGridLayoutManager;
-import android.util.Log;
 
+import com.mvp.framework.R;
 import com.mvp.framework.module.base.params.BasePaginationParams;
 import com.mvp.framework.module.base.presenter.BasePaginationPresenter;
-import com.mvp.framework.module.base.view.activity.BaseListActivity;
+import com.mvp.framework.module.base.view.activity.MvpListActivityList;
 import com.mvp.framework.module.base.view.adapter.BaseListAdapter;
 import com.mvp.framework.module.test.bean.NuoMiCategoryBean;
 import com.mvp.framework.module.test.presenter.NuoMiCategoryPresenter;
 import com.mvp.framework.module.test.view.adapter.NuoMiCategoryAdapter;
-import com.mvp.framework.module.test.view.iview.INuoMiCategoryView;
+import com.mvp.framework.module.test.view.iview.INuoMiCategoryMvpListView;
 
 import java.util.List;
 
@@ -22,9 +21,7 @@ import java.util.List;
  * @date date 16/10/24 下午5:10
  * @Description: 测试糯米分类
  */
-public class NuomiCategoryActivity extends BaseListActivity<NuoMiCategoryBean> implements INuoMiCategoryView{
-
-    private static final String TAG =  "NuomiCategoryActivity";
+public class NuomiCategoryActivity extends MvpListActivityList<NuoMiCategoryBean> implements INuoMiCategoryMvpListView {
 
     @Override
     public void onCreate() {
@@ -44,7 +41,6 @@ public class NuomiCategoryActivity extends BaseListActivity<NuoMiCategoryBean> i
 
     @Override
     public BasePaginationPresenter setPresenter() {
-        Log.d(TAG, "setPresenter: " );
         return new NuoMiCategoryPresenter(this);
     }
 
@@ -57,5 +53,15 @@ public class NuomiCategoryActivity extends BaseListActivity<NuoMiCategoryBean> i
     @Override
     public void showNuoMiCategoryView(List<NuoMiCategoryBean> nuoMiCategoryList) {
         setData(nuoMiCategoryList);
+    }
+
+    @Override
+    public String setErrorString() {
+        return "你的信号被狗吃了";
+    }
+
+    @Override
+    public int setErrorImageResource() {
+        return R.mipmap.my_error;
     }
 }

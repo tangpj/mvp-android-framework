@@ -1,36 +1,27 @@
 package com.mvp.framework;
 
-import android.app.ListActivity;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
 
 import com.mvp.framework.module.test.bean.NuoMiShopInfoBean;
-import com.mvp.framework.module.test.bean.NuoMiCategoryBean;
 import com.mvp.framework.module.test.bean.WeatherBean;
 import com.mvp.framework.module.test.params.NuoMiShopInfoParams;
 import com.mvp.framework.module.test.params.WeatherParams;
 import com.mvp.framework.module.test.presenter.NuoMiShopInfoPresenter;
-import com.mvp.framework.module.test.presenter.NuoMiCategoryPresenter;
 import com.mvp.framework.module.test.presenter.WeatherPresenter;
 import com.mvp.framework.module.test.view.activity.NuomiCategoryActivity;
 import com.mvp.framework.module.test.view.activity.TestActivity;
-import com.mvp.framework.module.test.view.iview.INuoMiShopInfoView;
-import com.mvp.framework.module.test.view.iview.INuoMiCategoryView;
-import com.mvp.framework.module.test.view.iview.IWeatherView;
-import com.mvp.framework.utils.ListUtils;
+import com.mvp.framework.module.test.view.iview.INuoMiShopInfoMvpView;
+import com.mvp.framework.module.test.view.iview.IWeatherMvpView;
 import com.mvp.framework.utils.LogUtil;
 
-import java.util.ArrayList;
-import java.util.List;
 
-
-public class MainActivity extends AppCompatActivity implements IWeatherView
-        ,INuoMiShopInfoView {
+public class MainActivity extends AppCompatActivity implements IWeatherMvpView
+        ,INuoMiShopInfoMvpView {
 
     private static final String TAG = "MainActivity";
 
@@ -125,5 +116,10 @@ public class MainActivity extends AppCompatActivity implements IWeatherView
     @Override
     public void showNuoMiShopInfoView(NuoMiShopInfoBean nuoMiShopInfo) {
         Toast.makeText(this,"商户名称： " + nuoMiShopInfo.shopName,Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
+    public void showSucceed(boolean isSucceed) {
+
     }
 }

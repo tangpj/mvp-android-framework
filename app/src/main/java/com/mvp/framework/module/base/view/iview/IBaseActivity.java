@@ -1,69 +1,24 @@
 package com.mvp.framework.module.base.view.iview;
 
-import android.os.Bundle;
+
 import android.support.annotation.NonNull;
-import android.support.design.widget.FloatingActionButton;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
+import android.support.v4.app.Fragment;
 
 /**
  * @ClassName: IBaseActivity
  * @author create by Tang
- * @date date 16/10/20 上午11:19
- * @Description: Activity的基本处理
+ * @date date 16/10/26 下午1:47
+ * @Description: BaseActivity对应接口
  */
 
-public interface IBaseActivity{
+public interface IBaseActivity extends IActivity{
 
     /**
-     * @Method: initView
+     * @Method: setFragment
      * @author create by Tang
-     * @date date 16/10/20 下午2:32
-     * @Description: 创建子activity布局
+     * @date date 16/10/26 下午1:49
+     * @Description: 设置Fragment
      */
     @NonNull
-    View onCreateView(LayoutInflater inflater,ViewGroup container,Bundle savedInstanceState);
-
-
-    /**
-     * @Method: Reconnection
-     * @author create by Tang
-     * @date date 16/10/20 下午4:00
-     * @Description: 重新连接
-     * 这里要注意的是，如果一个页面里面有多个获取数据的presenter，
-     * 需要确认获取数据失败的presenter
-     * 具体需要根据实际业务来处理
-     */
-    void onReconnection();
-
-    /**
-     * @Method: setTitle
-     * @author create by Tang
-     * @date date 16/10/20 上午11:06
-     * @Description: 设置页面标题
-     */
-    void setTitle(String title);
-
-    /**
-     * @Method: setProgressType
-     * @author create by Tang
-     * @date date 16/10/25 上午10:54
-     * @Description:
-     * 设置加载进度的样式
-     * 初始化为默认模式，
-     * 在子类中调用该方法可以重设进度条的样式
-     */
-    void setProgressType(int progressType);
-
-    /**
-     * @Method: setDisplayHomeAsUpEnabled
-     * @author create by Tang
-     * @date date 16/10/20 上午11:16
-     * @Description: ActionBar上是否显示返回按钮
-     */
-    @NonNull
-    boolean setDisplayHomeAsUpEnabled();
-
-    FloatingActionButton getFloatingActionButton();
+    Fragment setFragment();
 }

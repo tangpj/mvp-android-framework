@@ -42,6 +42,7 @@ public abstract class BaseListAdapter<Data> extends RecyclerView.Adapter<Recycle
 
 
     public void setData(List<Data> data){
+        //这样处理是为了防止Presenter中的数据因运算改动时。影响List中的数据
         mData.clear();
         mData.addAll(data);
         notifyDataSetChanged();

@@ -22,7 +22,7 @@ import org.json.JSONObject;
 public class BaseModel implements IBaseModel {
 
     private static final int  VOLLEY_ERROR = 10001;   //网络错误
-    private static final String VOLLEY_ERROR_DESC = "点击屏幕重新加载";
+    private static final String VOLLEY_ERROR_DESC = "网络错误，请检查网络连接";
 
     private MyVolleyRequest request;
 
