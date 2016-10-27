@@ -29,19 +29,15 @@ public class NuoMiShopInfoActivity extends MvpActivity implements INuoMiShopInfo
     @NonNull
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+
         View view = LayoutInflater.from(this)
                 .inflate(R.layout.activity_nuomi_shop_info,container,false);
-
         shopInfo = (TextView)view.findViewById(R.id.shop_info);
         nuoMiShopInfoPresenter = new NuoMiShopInfoPresenter(this);
+        nuoMiShopInfoPresenter.accessServer(null);
         return view;
     }
 
-    @Override
-    protected void onResume() {
-        super.onResume();
-        nuoMiShopInfoPresenter.accessServer(null);
-    }
 
     @Override
     public void onReconnection() {

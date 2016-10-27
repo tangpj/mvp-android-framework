@@ -31,5 +31,26 @@
         android:layout_height="wrap_content"
         android:text="商家信息"/>
 
+    <Button
+        android:id="@+id/f_weather_btn"
+        android:text="f天气查询"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        />
+
+
+    <Button
+        android:id="@+id/f_nuo_mi_category_btn"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="f获取糯米分类"/>
+
+    <Button
+        android:id="@+id/f_nuo_mi_shop_info_btn"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="f商家信息"/>
+
+
 
 </LinearLayout>

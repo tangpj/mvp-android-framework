@@ -3,6 +3,7 @@ package com.mvp.framework.module.base.view.activity;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.design.widget.AppBarLayout;
 import android.support.design.widget.CoordinatorLayout;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -31,17 +32,16 @@ public abstract class BaseActivity extends AppCompatActivity implements IBaseAct
     private FloatingActionButton fab;
     private ActionBar ab;
 
+    private CoordinatorLayout contentViewGroup;
+    private View contentView;
+
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        View view = LayoutInflater.from(this).inflate(R.layout.activity_base,null);
-        ViewGroup.LayoutParams lp = new ViewGroup.LayoutParams(
-                ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT);
-        setContentView(view,lp);
+        setContentView(R.layout.activity_base);
         initBaseView();
 
-        CoordinatorLayout contentView = (CoordinatorLayout) view;
     }
 
     @Override
@@ -88,7 +88,16 @@ public abstract class BaseActivity extends AppCompatActivity implements IBaseAct
             }
         });
 
-        getSupportFragmentManager().beginTransaction().replace(R.id.fragment,setFragment()).commit();
+        contentViewGroup = (CoordinatorLayout) ((ViewGroup)
+                findViewById(android.R.id.content)).getChildAt(0);
+        CoordinatorLayout.LayoutParams lp = new CoordinatorLayout.LayoutParams(
+                CoordinatorLayout.LayoutParams.MATCH_PARENT
+                ,CoordinatorLayout.LayoutParams.MATCH_PARENT);
+        lp.setBehavior(new AppBarLayout.ScrollingViewBehavior());
+
+        contentView = setContentView(getLayoutInflater(),contentViewGroup);
+
+        contentViewGroup.addView(contentView,lp);
     }
 
 }

@@ -3,6 +3,9 @@ package com.mvp.framework.module.base.view.iview;
 
 import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
 
 /**
  * @ClassName: IBaseActivity
@@ -13,12 +16,6 @@ import android.support.v4.app.Fragment;
 
 public interface IBaseActivity extends IActivity{
 
-    /**
-     * @Method: setFragment
-     * @author create by Tang
-     * @date date 16/10/26 下午1:49
-     * @Description: 设置Fragment
-     */
-    @NonNull
-    Fragment setFragment();
+    View setContentView(LayoutInflater inflater, ViewGroup container);
+    
 }

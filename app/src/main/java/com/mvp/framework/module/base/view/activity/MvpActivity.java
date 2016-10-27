@@ -46,7 +46,7 @@ public abstract class MvpActivity extends AppCompatActivity
     //下拉进度条
     public static final int PROGRESS_TYPE_DROP_DOWN = 3;
 
-    //默认对加载进度条的样式为Dialog
+    //默认对加载进度条
     private int progressType;
 
     private Toolbar toolbar;
@@ -146,17 +146,63 @@ public abstract class MvpActivity extends AppCompatActivity
         return null;
     }
 
+    @Override
+    public void onError(int errorCode, String errorDesc) {
+        showProgress(false);
+        LogUtil.e(getClass(), "showServerError: error code = "
+                + errorCode + " & error desc = " + errorDesc);
+
+        switch (progressType) {
+
+            case PROGRESS_TYPE_DEFAULT:
+                if (setErrorImageResource() != 0) {
+                    errorImage.setImageDrawable(getResources().getDrawable(setErrorImageResource()));
+                }
+
+                if (!TextUtils.isEmpty(errorDesc)) {
+                    errorText.setText(errorDesc);
+                }
+                contentView.setVisibility(View.GONE);
+                errorLayout.setVisibility(View.VISIBLE);
+                break;
+
+            case PROGRESS_TYPE_DIALOG:
+                contentView.setVisibility(View.GONE);
+                errorLayout.setVisibility(View.VISIBLE);
+                break;
+
+            case PROGRESS_TYPE_DROP_DOWN:
+                if (setErrorImageResource() != 0) {
+                    errorImage.setImageDrawable(getResources().getDrawable(setErrorImageResource()));
+                }
+
+                if (!TextUtils.isEmpty(errorDesc)) {
+                    errorText.setText(errorDesc);
+                }
+
+                if (!isSucceed) {
+                    contentView.setVisibility(View.GONE);
+                    errorLayout.setVisibility(View.VISIBLE);
+                }
+
+                break;
+        }
+    }
 
     @Override
     public void showProgress(boolean show) {
         switch (progressType){
             case PROGRESS_TYPE_DEFAULT:
                 if (show){
-                    contentView.setVisibility(View.GONE);
+                    if (contentView != null){
+                        contentView.setVisibility(View.GONE);
+                    }
                     defaultProgress.setVisibility(View.VISIBLE);
                 }else {
                     defaultProgress.setVisibility(View.GONE);
-                    contentView.setVisibility(View.VISIBLE);
+                    if(contentView != null){
+                        contentView.setVisibility(View.VISIBLE);
+                    }
 
                 }
                 break;
@@ -199,48 +245,7 @@ public abstract class MvpActivity extends AppCompatActivity
         errorLayout.setVisibility(View.GONE);
     }
 
-    @Override
-    public void onError(int errorCode, String errorDesc) {
-        showProgress(false);
-        LogUtil.e(getClass(),"showServerError: error code = "
-                + errorCode + " & error desc = " + errorDesc );
 
-        switch (progressType){
-
-            case PROGRESS_TYPE_DEFAULT:
-                if (setErrorImageResource() != 0){
-                    errorImage.setImageDrawable(getResources().getDrawable(setErrorImageResource()));
-                }
-
-                if (!TextUtils.isEmpty(errorDesc)){
-                    errorText.setText(errorDesc);
-                }
-                contentView.setVisibility(View.GONE);
-                errorLayout.setVisibility(View.VISIBLE);
-                break;
-
-            case PROGRESS_TYPE_DIALOG:
-                contentView.setVisibility(View.GONE);
-                errorLayout.setVisibility(View.VISIBLE);
-                break;
-
-            case PROGRESS_TYPE_DROP_DOWN:
-                if (setErrorImageResource() != 0){
-                    errorImage.setImageDrawable(getResources().getDrawable(setErrorImageResource()));
-                }
-
-                if (!TextUtils.isEmpty(errorDesc)){
-                    errorText.setText(errorDesc);
-                }
-
-                if (!isSucceed){
-                    contentView.setVisibility(View.GONE);
-                    errorLayout.setVisibility(View.VISIBLE);
-                }
-
-                break;
-        }
-    }
 
     /**
      * @Method: initBaseView

@@ -10,6 +10,7 @@ import android.widget.Button;
 import android.widget.Toast;
 
 import com.mvp.framework.R;
+import com.mvp.framework.module.base.view.activity.BaseActivity;
 import com.mvp.framework.module.base.view.activity.MvpActivity;
 import com.mvp.framework.module.test.bean.NuoMiShopInfoBean;
 import com.mvp.framework.module.test.bean.WeatherBean;
@@ -26,20 +27,28 @@ import com.mvp.framework.module.test.view.iview.IWeatherMvpView;
  * @Description: 测试BaseActivity的效果
  */
 
-public class TestActivity extends MvpActivity implements INuoMiShopInfoMvpView {
+public class TestActivity extends BaseActivity {
 
     private Button weatherBtn;
     private Button nuoMiCategoryBtn;
     private Button nuoMiShopInfoBtn;
 
+    //测试baseFragment
+    private Button fWeatherBtn;
+    private Button fNuoMiCategoryBtn;
+    private Button fNuoMiShopInfoBtn;
 
-    @NonNull
+
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+    public View setContentView(LayoutInflater inflater, ViewGroup container) {
         View view = inflater.inflate(R.layout.activity_test,container,false);
         weatherBtn = (Button) view.findViewById(R.id.weather_btn);
         nuoMiCategoryBtn = (Button) view.findViewById(R.id.nuo_mi_category_btn);
         nuoMiShopInfoBtn = (Button) view.findViewById(R.id.nuo_mi_shop_info_btn);
+
+        fWeatherBtn = (Button) view.findViewById(R.id.f_weather_btn);
+        fNuoMiCategoryBtn = (Button) view.findViewById(R.id.f_nuo_mi_category_btn);
+        fNuoMiShopInfoBtn = (Button) view.findViewById(R.id.f_nuo_mi_shop_info_btn);
 
         weatherBtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -61,7 +70,6 @@ public class TestActivity extends MvpActivity implements INuoMiShopInfoMvpView {
         nuoMiShopInfoBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                setProgressType(PROGRESS_TYPE_DROP_DOWN);
 //                NuoMiShopInfoParams params = new NuoMiShopInfoParams();
 //                params.shop_id = "1745896";
 
@@ -70,19 +78,33 @@ public class TestActivity extends MvpActivity implements INuoMiShopInfoMvpView {
             }
         });
 
+
+
+        fWeatherBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(TestActivity.this,WeatherFragmentActivity.class);
+                startActivity(intent);
+            }
+        });
+
+        fNuoMiCategoryBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+            }
+        });
+
+
+        fNuoMiShopInfoBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+            }
+        });
+
         setTitle("测试11");
 
         return view;
-    }
-
-    @Override
-    public void onReconnection() {
-        super.onReconnection();
-    }
-
-
-    @Override
-    public void showNuoMiShopInfoView(NuoMiShopInfoBean nuoMiShopInfo) {
-        Toast.makeText(this,"商户名称： " + nuoMiShopInfo.shopName,Toast.LENGTH_SHORT).show();
     }
 }

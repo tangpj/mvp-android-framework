@@ -33,13 +33,9 @@ public class WeatherActivity extends MvpActivity implements IWeatherMvpView {
         View view = LayoutInflater.from(this).inflate(R.layout.activity_weather,container,false);
         weather = (TextView) view.findViewById(R.id.weather);
         presenter = new WeatherPresenter(this);
-        return view;
-    }
-
-    @Override
-    protected void onResume() {
-        super.onResume();
         presenter.accessServer(null);
+
+        return view;
     }
 
     @Override
