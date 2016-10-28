@@ -23,6 +23,8 @@ import java.util.List;
  */
 public class NuomiCategoryActivity extends MvpListActivityList<NuoMiCategoryBean> implements INuoMiCategoryListView {
 
+    private NuoMiCategoryAdapter adapter;
+
     @Override
     public void onCreate() {
         super.onCreate();
@@ -36,7 +38,10 @@ public class NuomiCategoryActivity extends MvpListActivityList<NuoMiCategoryBean
 
     @Override
     public BaseListAdapter setAdapter() {
-        return new NuoMiCategoryAdapter();
+        adapter = new NuoMiCategoryAdapter();
+        adapter.setHeaderView(R.layout.test_header);
+        adapter.setFooterView(R.layout.test_footer);
+        return adapter;
     }
 
     @Override
