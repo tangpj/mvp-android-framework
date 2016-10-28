@@ -7,14 +7,14 @@
         android:id="@+id/text"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textSize="12sp"
-        android:layout_marginTop="16dp"
+        android:textSize="@dimen/text_main_body"
+        android:layout_marginTop="@dimen/activity_vertical_margin"
         android:gravity="center"/>
 
     <View
         android:layout_width="match_parent"
         android:layout_height="0.1dp"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="@dimen/activity_vertical_margin"
         android:background="#c4c4c4"/>
 
 </LinearLayout>

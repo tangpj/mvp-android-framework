@@ -2,7 +2,6 @@ package com.mvp.framework.module.base.view.activity;
 
 import android.app.ProgressDialog;
 import android.os.Bundle;
-import android.support.annotation.CallSuper;
 import android.support.annotation.NonNull;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -20,9 +19,9 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.mvp.framework.R;
+import com.mvp.framework.module.base.view.iview.IErrorInfo;
 import com.mvp.framework.module.base.view.iview.IMvpActivity;
 import com.mvp.framework.module.base.view.iview.IMvpView;
-import com.mvp.framework.module.base.view.iview.IResetErrorInfo;
 import com.mvp.framework.utils.LogUtil;
 
 
@@ -35,7 +34,7 @@ import com.mvp.framework.utils.LogUtil;
  * 实现了IBaseView接口
  */
 public abstract class MvpActivity extends AppCompatActivity
-        implements IMvpActivity,IMvpView,IResetErrorInfo{
+        implements IMvpActivity,IMvpView,IErrorInfo {
 
     //默认进度条
     public static final int PROGRESS_TYPE_DEFAULT = 1;

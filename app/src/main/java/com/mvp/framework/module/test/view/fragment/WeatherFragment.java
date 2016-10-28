@@ -25,7 +25,7 @@ public class WeatherFragment extends MvpFragment implements IWeatherMvpView{
 
     @Override
     public View onCreateContentView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.activity_weather,container,false);
+        View view = inflater.inflate(R.layout.fragment_weather,container,false);
         weather = (TextView) view.findViewById(R.id.weather);
         presenter = new WeatherPresenter(this);
         presenter.accessServer(null);

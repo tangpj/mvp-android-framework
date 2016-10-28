@@ -26,7 +26,7 @@ import com.mvp.framework.module.base.presenter.BasePaginationPresenter;
 import com.mvp.framework.module.base.view.adapter.BaseListAdapter;
 import com.mvp.framework.module.base.view.iview.IMvpListActivity;
 import com.mvp.framework.module.base.view.iview.IMvpListView;
-import com.mvp.framework.module.base.view.iview.IResetErrorInfo;
+import com.mvp.framework.module.base.view.iview.IErrorInfo;
 import com.mvp.framework.utils.LogUtil;
 
 import java.util.List;
@@ -40,7 +40,7 @@ import java.util.List;
  * 获取列表型数据的Activity继承该类可以实现自动处理大部分数据
  */
 public abstract class MvpListActivityList<Bean> extends AppCompatActivity
-        implements IMvpListActivity<Bean>,IMvpListView,IResetErrorInfo {
+        implements IMvpListActivity<Bean>,IMvpListView,IErrorInfo {
 
     private Toolbar toolbar;
     private FloatingActionButton fab;
@@ -107,17 +107,23 @@ public abstract class MvpListActivityList<Bean> extends AppCompatActivity
 
     @Override
     public void onRefresh() {
-        presenter.refresh(setParams());
+        if (presenter != null){
+            presenter.refresh(setParams());
+        }
     }
 
     @Override
     public void onLoadingNextPage() {
-        presenter.loading();
+        if (presenter != null){
+            presenter.loading();
+        }
     }
 
     @Override
     public void onRefreshIndexPage(int index) {
-        presenter.refreshIndexPage(index);
+        if (presenter != null) {
+            presenter.refreshIndexPage(index);
+        }
     }
 
     @Override
@@ -126,6 +132,11 @@ public abstract class MvpListActivityList<Bean> extends AppCompatActivity
             errorLayout.setVisibility(View.GONE);
         }
         adapter.setData(data);
+    }
+
+    @Override
+    public void reSetContentView(int layoutId){
+        this.mLayoutId = layoutId;
     }
 
     @Override
@@ -214,6 +225,7 @@ public abstract class MvpListActivityList<Bean> extends AppCompatActivity
     private void initBaseView(){
         toolbar = (Toolbar) findViewById(R.id.toolbar);
         fab = (FloatingActionButton) findViewById(R.id.fab);
+
         baseRecyclerView = (RecyclerView) findViewById(R.id.base_recycler_view) ;
         baseRefreshLayout = (SwipeRefreshLayout) findViewById(R.id.base_refresh_layout);
 
@@ -292,16 +304,6 @@ public abstract class MvpListActivityList<Bean> extends AppCompatActivity
             }
         }
         return max;
-    }
-
-    /**
-     * @Method: reSetContentView
-     * @author create by Tang
-     * @date date 16/10/25 上午9:51
-     * @Description: 重新设置ContentView,新设置的ContentView中的id必须要和activity_base_list中的至
-     */
-    public void reSetContentView(int layoutId){
-        this.mLayoutId = layoutId;
     }
 
 

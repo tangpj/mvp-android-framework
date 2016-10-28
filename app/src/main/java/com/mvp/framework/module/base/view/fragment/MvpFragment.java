@@ -1,9 +1,9 @@
 package com.mvp.framework.module.base.view.fragment;
 
-import android.app.Fragment;
 import android.app.ProgressDialog;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.v4.app.Fragment;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
@@ -16,9 +16,9 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.mvp.framework.R;
+import com.mvp.framework.module.base.view.iview.IErrorInfo;
 import com.mvp.framework.module.base.view.iview.IMvpFragment;
 import com.mvp.framework.module.base.view.iview.IMvpView;
-import com.mvp.framework.module.base.view.iview.IResetErrorInfo;
 import com.mvp.framework.utils.LogUtil;
 
 /**
@@ -29,7 +29,7 @@ import com.mvp.framework.utils.LogUtil;
  */
 
 public abstract class MvpFragment extends Fragment implements
-        IMvpView,IMvpFragment,IResetErrorInfo {
+        IMvpView,IMvpFragment,IErrorInfo {
 
     //默认进度条
     public static final int PROGRESS_TYPE_DEFAULT = 1;
@@ -192,6 +192,7 @@ public abstract class MvpFragment extends Fragment implements
                     errorText.setText(errorDesc);
                 }
 
+                //如果首次获取数据成功，刷新后获取失败的话，则不显示错误信息
                 if (!isSucceed) {
                     contentView.setVisibility(View.GONE);
                     errorLayout.setVisibility(View.VISIBLE);

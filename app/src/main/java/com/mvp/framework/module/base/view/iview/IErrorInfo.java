@@ -1,13 +1,13 @@
 package com.mvp.framework.module.base.view.iview;
 
 /**
- * @ClassName: IResetErrorInfo
+ * @ClassName: IErrorInfo
  * @author create by Tang
  * @date date 16/10/26 上午11:11
  * @Description: 重设错误显示View
  */
 
-public interface IResetErrorInfo {
+public interface IErrorInfo {
 
     /**
      * @Method: setErrorImageResource

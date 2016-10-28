@@ -29,6 +29,7 @@
         <activity android:name=".module.test.view.activity.WeatherActivity"/>
         <activity android:name=".module.test.view.activity.NuoMiShopInfoActivity"/>
         <activity android:name=".module.test.view.activity.WeatherFragmentActivity"/>
+        <activity android:name=".module.test.view.activity.NuomiCategoryFragmentActivity"/>
 
     </application>
 
