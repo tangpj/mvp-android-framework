@@ -15,13 +15,13 @@ import com.mvp.framework.module.test.presenter.NuoMiShopInfoPresenter;
 import com.mvp.framework.module.test.presenter.WeatherPresenter;
 import com.mvp.framework.module.test.view.activity.NuomiCategoryActivity;
 import com.mvp.framework.module.test.view.activity.TestActivity;
-import com.mvp.framework.module.test.view.iview.INuoMiShopInfoMvpView;
-import com.mvp.framework.module.test.view.iview.IWeatherMvpView;
+import com.mvp.framework.module.test.view.iview.INuoMiShopInfoView;
+import com.mvp.framework.module.test.view.iview.IWeatherView;
 import com.mvp.framework.utils.LogUtil;
 
 
-public class MainActivity extends AppCompatActivity implements IWeatherMvpView
-        ,INuoMiShopInfoMvpView {
+public class MainActivity extends AppCompatActivity implements IWeatherView
+        ,INuoMiShopInfoView {
 
     private static final String TAG = "MainActivity";
 

@@ -5,7 +5,7 @@ import com.mvp.framework.config.ApiInterface;
 import com.mvp.framework.module.base.presenter.BasePresenter;
 import com.mvp.framework.module.test.bean.NuoMiShopInfoBean;
 import com.mvp.framework.module.test.params.NuoMiShopInfoParams;
-import com.mvp.framework.module.test.view.iview.INuoMiShopInfoMvpView;
+import com.mvp.framework.module.test.view.iview.INuoMiShopInfoView;
 
 
 /**
@@ -17,9 +17,9 @@ import com.mvp.framework.module.test.view.iview.INuoMiShopInfoMvpView;
 
 public class NuoMiShopInfoPresenter extends BasePresenter<NuoMiShopInfoParams,NuoMiShopInfoBean>{
 
-    private INuoMiShopInfoMvpView currencyView;
+    private INuoMiShopInfoView currencyView;
 
-    public NuoMiShopInfoPresenter(INuoMiShopInfoMvpView currencyView) {
+    public NuoMiShopInfoPresenter(INuoMiShopInfoView currencyView) {
         super(currencyView,NuoMiShopInfoBean.class);
         this.currencyView = currencyView;
         getModel().setApiInterface(ApiInterface.NUO_MI_SHOP_INFO);

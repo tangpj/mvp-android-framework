@@ -11,7 +11,7 @@ import com.mvp.framework.R;
 import com.mvp.framework.module.base.view.activity.MvpActivity;
 import com.mvp.framework.module.test.bean.WeatherBean;
 import com.mvp.framework.module.test.presenter.WeatherPresenter;
-import com.mvp.framework.module.test.view.iview.IWeatherMvpView;
+import com.mvp.framework.module.test.view.iview.IWeatherView;
 
 /**
  * @ClassName: WeatherActivity
@@ -20,7 +20,7 @@ import com.mvp.framework.module.test.view.iview.IWeatherMvpView;
  * @Description: TODO
  */
 
-public class WeatherActivity extends MvpActivity implements IWeatherMvpView {
+public class WeatherActivity extends MvpActivity implements IWeatherView {
 
     private TextView weather;
 

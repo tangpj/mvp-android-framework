@@ -10,7 +10,7 @@ import com.mvp.framework.R;
 import com.mvp.framework.module.base.view.fragment.MvpFragment;
 import com.mvp.framework.module.test.bean.WeatherBean;
 import com.mvp.framework.module.test.presenter.WeatherPresenter;
-import com.mvp.framework.module.test.view.iview.IWeatherMvpView;
+import com.mvp.framework.module.test.view.iview.IWeatherView;
 
 /**
  * @ClassName: WeatherFragment
@@ -18,7 +18,7 @@ import com.mvp.framework.module.test.view.iview.IWeatherMvpView;
  * @date date 16/10/27 下午3:04
  * @Description: TODO
  */
-public class WeatherFragment extends MvpFragment implements IWeatherMvpView{
+public class WeatherFragment extends MvpFragment implements IWeatherView {
 
     private TextView weather;
     private WeatherPresenter presenter;
@@ -26,6 +26,7 @@ public class WeatherFragment extends MvpFragment implements IWeatherMvpView{
     @Override
     public View onCreateContentView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_weather,container,false);
+        setProgressType(PROGRESS_TYPE_DROP_DOWN);
         weather = (TextView) view.findViewById(R.id.weather);
         presenter = new WeatherPresenter(this);
         presenter.accessServer(null);

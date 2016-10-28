@@ -3,7 +3,7 @@ package com.mvp.framework.module.test.presenter;
 import com.mvp.framework.module.base.params.BasePaginationParams;
 import com.mvp.framework.module.base.presenter.BasePaginationPresenter;
 import com.mvp.framework.module.test.bean.NuoMiCategoryBean;
-import com.mvp.framework.module.test.view.iview.INuoMiCategoryMvpListView;
+import com.mvp.framework.module.test.view.iview.INuoMiCategoryListView;
 
 import java.util.List;
 
@@ -18,9 +18,9 @@ import static com.mvp.framework.config.ApiInterface.NUO_MI_CATEGOR;
 
 public class NuoMiCategoryPresenter extends BasePaginationPresenter<BasePaginationParams,NuoMiCategoryBean> {
 
-    private INuoMiCategoryMvpListView nuoMiCategoryView;
+    private INuoMiCategoryListView nuoMiCategoryView;
 
-    public NuoMiCategoryPresenter(INuoMiCategoryMvpListView nuoMiCategoryView) {
+    public NuoMiCategoryPresenter(INuoMiCategoryListView nuoMiCategoryView) {
         super(nuoMiCategoryView,NuoMiCategoryBean.class);
         this.nuoMiCategoryView = nuoMiCategoryView;
         getModel().setApiInterface(NUO_MI_CATEGOR);

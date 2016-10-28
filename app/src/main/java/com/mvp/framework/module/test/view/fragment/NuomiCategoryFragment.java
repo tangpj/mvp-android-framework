@@ -10,7 +10,7 @@ import com.mvp.framework.module.base.view.fragment.MvpListFragment;
 import com.mvp.framework.module.test.bean.NuoMiCategoryBean;
 import com.mvp.framework.module.test.presenter.NuoMiCategoryPresenter;
 import com.mvp.framework.module.test.view.adapter.NuoMiCategoryAdapter;
-import com.mvp.framework.module.test.view.iview.INuoMiCategoryMvpListView;
+import com.mvp.framework.module.test.view.iview.INuoMiCategoryListView;
 
 import java.util.List;
 
@@ -21,7 +21,7 @@ import java.util.List;
  * @Description: TODO
  */
 
-public class NuomiCategoryFragment extends MvpListFragment implements INuoMiCategoryMvpListView{
+public class NuomiCategoryFragment extends MvpListFragment implements INuoMiCategoryListView {
     @Override
     public RecyclerView.LayoutManager setLayoutManager() {
         return new LinearLayoutManager(getActivity());

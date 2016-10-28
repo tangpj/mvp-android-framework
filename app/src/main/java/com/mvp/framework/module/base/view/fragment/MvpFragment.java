@@ -3,6 +3,7 @@ package com.mvp.framework.module.base.view.fragment;
 import android.app.ProgressDialog;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.text.TextUtils;
@@ -14,6 +15,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.mvp.framework.R;
 import com.mvp.framework.module.base.view.iview.IErrorInfo;
@@ -196,6 +198,8 @@ public abstract class MvpFragment extends Fragment implements
                 if (!isSucceed) {
                     contentView.setVisibility(View.GONE);
                     errorLayout.setVisibility(View.VISIBLE);
+                }else {
+                    Snackbar.make(getView(),errorDesc,Snackbar.LENGTH_SHORT).show();
                 }
 
                 break;

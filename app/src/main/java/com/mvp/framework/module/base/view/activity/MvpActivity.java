@@ -182,6 +182,8 @@ public abstract class MvpActivity extends AppCompatActivity
                 if (!isSucceed) {
                     contentView.setVisibility(View.GONE);
                     errorLayout.setVisibility(View.VISIBLE);
+                }else {
+                    Snackbar.make(fab,errorDesc,Snackbar.LENGTH_SHORT).show();
                 }
 
                 break;

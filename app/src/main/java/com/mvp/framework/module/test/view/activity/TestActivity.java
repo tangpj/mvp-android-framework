@@ -1,24 +1,13 @@
 package com.mvp.framework.module.test.view.activity;
 
 import android.content.Intent;
-import android.os.Bundle;
-import android.support.annotation.NonNull;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.Toast;
 
 import com.mvp.framework.R;
 import com.mvp.framework.module.base.view.activity.BaseActivity;
-import com.mvp.framework.module.base.view.activity.MvpActivity;
-import com.mvp.framework.module.test.bean.NuoMiShopInfoBean;
-import com.mvp.framework.module.test.bean.WeatherBean;
-import com.mvp.framework.module.test.params.NuoMiShopInfoParams;
-import com.mvp.framework.module.test.presenter.NuoMiShopInfoPresenter;
-import com.mvp.framework.module.test.presenter.WeatherPresenter;
-import com.mvp.framework.module.test.view.iview.INuoMiShopInfoMvpView;
-import com.mvp.framework.module.test.view.iview.IWeatherMvpView;
 
 /**
  * @ClassName: TestActivity
@@ -73,7 +62,7 @@ public class TestActivity extends BaseActivity {
 //                NuoMiShopInfoParams params = new NuoMiShopInfoParams();
 //                params.shop_id = "1745896";
 
-                Intent intent = new Intent(TestActivity.this,NuoMiShopInfoActivity.class);
+                Intent intent = new Intent(TestActivity.this,NuomiShopInfoActivity.class);
                 startActivity(intent);
             }
         });
@@ -100,7 +89,8 @@ public class TestActivity extends BaseActivity {
         fNuoMiShopInfoBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                Intent intent = new Intent(TestActivity.this,NuomiShopInfoFragmentActivity.class);
+                startActivity(intent);
             }
         });
 
