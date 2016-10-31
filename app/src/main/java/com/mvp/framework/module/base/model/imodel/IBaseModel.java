@@ -12,6 +12,8 @@ public interface IBaseModel {
 
     void setApiInterface(String apiInterface);
 
+    void setServerAddress(String address);
+
     void setMethod(int method);
 
     void cancelRequest();

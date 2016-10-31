@@ -1,5 +1,7 @@
 package com.mvp.framework.module.base.model;
 
+import android.text.TextUtils;
+
 import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
@@ -28,6 +30,7 @@ public class BaseModel implements IBaseModel {
 
     private int method = Request.Method.GET;       //请求方式，默认get
     private String apiInterface;
+    private String address;
 
     private IBasePresenter basePresenter;
 
@@ -38,8 +41,13 @@ public class BaseModel implements IBaseModel {
 
     @Override
     public void sendRequestToServer() {
-
-        request = new MyVolleyRequest(method, ServerManager.getServerUrl(apiInterface)
+        String serverUrl;
+        if (!TextUtils.isEmpty(address)){
+            serverUrl = address + apiInterface;
+        }else {
+            serverUrl = ServerManager.getServerUrl(apiInterface);
+        }
+        request = new MyVolleyRequest(method, serverUrl
                 , basePresenter.setParams()
                 , new Response.Listener<JSONObject>() {
             @Override
@@ -64,6 +72,11 @@ public class BaseModel implements IBaseModel {
     @Override
     public void setApiInterface(String apiInterface){
         this.apiInterface = apiInterface;
+    }
+
+    @Override
+    public void setServerAddress(String address) {
+        this.address = address;
     }
 
     @Override

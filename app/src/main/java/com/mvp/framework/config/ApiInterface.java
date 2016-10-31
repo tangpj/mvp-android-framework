@@ -20,7 +20,6 @@ public class ApiInterface {
     //获取糯米商家信息
     public static final String NUO_MI_SHOP_INFO = "/baidunuomi/openapi/shopinfo?shop_id=1745896";
 
-    //病历列表
-    public static final String USER_CASE_LIST = "/doctor/v2/api/cases/list.do"  ;
+
 
 }
