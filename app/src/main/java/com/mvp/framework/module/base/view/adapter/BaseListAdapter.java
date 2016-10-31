@@ -120,18 +120,21 @@ public abstract class BaseListAdapter<Data> extends RecyclerView.Adapter<Recycle
 
     @Override
     public int getItemCount() {
+        //只有data不为空时才显示头尾
+        if (mData.size() > 0){
+            if (headerView == null){
+                if (footerView == null){
+                    return mData.size();
+                }
 
-        if (headerView == null){
-            if (footerView == null){
-                return mData.size();
+                return mData.size() + 1;
             }
-
-            return mData.size() + 1;
+            if (footerView == null ){
+                return mData.size() + 1;
+            }
+            return mData.size() + 2;
         }
-        if (footerView == null ){
-            return mData.size() + 1;
-        }
-        return mData.size() + 2;
+        return 0;
     }
 
     @Override
@@ -156,18 +159,17 @@ public abstract class BaseListAdapter<Data> extends RecyclerView.Adapter<Recycle
         this.headerViewId = layoutId;
     }
 
-    private void onCreateHeaderView(int headerViewId,Context context,ViewGroup parent){
-        View headerView = LayoutInflater.from(context).inflate(headerViewId,parent,false);
-        this.headerView = headerView;
-    }
-
-
     public void setFooterView(View footerView){
         this.footerView = footerView;
     }
 
     public void setFooterView(int layoutId){
         this.footerViewId = layoutId;
+    }
+
+    private void onCreateHeaderView(int headerViewId,Context context,ViewGroup parent){
+        View headerView = LayoutInflater.from(context).inflate(headerViewId,parent,false);
+        this.headerView = headerView;
     }
 
     private void onCreateFooterView(int footerViewId,Context context,ViewGroup parent){
