@@ -20,7 +20,7 @@ import com.mvp.framework.module.test.view.iview.INuoMiShopInfoView;
  * @Description: TODO
  */
 
-public class NuomiShopInfoActivity extends MvpActivity implements INuoMiShopInfoView {
+public class NuoMiShopInfoActivity extends MvpActivity implements INuoMiShopInfoView {
 
     private TextView shopInfo;
 
