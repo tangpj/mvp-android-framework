@@ -62,7 +62,7 @@ public class TestActivity extends BaseActivity {
 //                NuoMiShopInfoParams params = new NuoMiShopInfoParams();
 //                params.shop_id = "1745896";
 
-                Intent intent = new Intent(TestActivity.this,NuomiShopInfoActivity.class);
+                Intent intent = new Intent(TestActivity.this,NuoMiShopInfoActivity.class);
                 startActivity(intent);
             }
         });
