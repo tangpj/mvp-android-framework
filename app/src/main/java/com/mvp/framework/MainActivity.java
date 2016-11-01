@@ -7,20 +7,25 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
 
+import com.mvp.framework.module.test.bean.NuoMiCategoryBean;
 import com.mvp.framework.module.test.bean.NuoMiShopInfoBean;
 import com.mvp.framework.module.test.bean.WeatherBean;
 import com.mvp.framework.module.test.params.NuoMiShopInfoParams;
 import com.mvp.framework.module.test.params.WeatherParams;
+import com.mvp.framework.module.test.presenter.NuoMiCategoryPresenter;
 import com.mvp.framework.module.test.presenter.NuoMiShopInfoPresenter;
 import com.mvp.framework.module.test.presenter.WeatherPresenter;
 import com.mvp.framework.module.test.view.activity.NuomiCategoryActivity;
 import com.mvp.framework.module.test.view.activity.TestActivity;
+import com.mvp.framework.module.test.view.iview.INuoMiCategoryListView;
 import com.mvp.framework.module.test.view.iview.INuoMiShopInfoView;
 import com.mvp.framework.module.test.view.iview.IWeatherView;
 import com.mvp.framework.utils.LogUtil;
 
+import java.util.List;
 
-public class MainActivity extends AppCompatActivity implements IWeatherView
+
+public class MainActivity extends AppCompatActivity implements IWeatherView,INuoMiCategoryListView
         ,INuoMiShopInfoView {
 
     private static final String TAG = "MainActivity";
@@ -32,6 +37,7 @@ public class MainActivity extends AppCompatActivity implements IWeatherView
 
     private WeatherPresenter presenter;
     private NuoMiShopInfoPresenter nuoMiShopInfoPresenter;
+    private NuoMiCategoryPresenter nuoMiCategoryPresenter;
 
 
     @Override
@@ -43,6 +49,7 @@ public class MainActivity extends AppCompatActivity implements IWeatherView
 
         presenter = new WeatherPresenter(this);
         nuoMiShopInfoPresenter = new NuoMiShopInfoPresenter(this);
+        nuoMiCategoryPresenter = new NuoMiCategoryPresenter(this);
 
 
     }
@@ -65,8 +72,7 @@ public class MainActivity extends AppCompatActivity implements IWeatherView
         nuoMiCategoryBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(MainActivity.this, NuomiCategoryActivity.class);
-                startActivity(intent);
+                nuoMiCategoryPresenter.accessServer();
             }
         });
 
@@ -120,6 +126,17 @@ public class MainActivity extends AppCompatActivity implements IWeatherView
 
     @Override
     public void showSucceed(boolean isSucceed) {
+
+    }
+
+    @Override
+    public void showNuoMiCategoryView(List<NuoMiCategoryBean> nuoMiCategoryList) {
+        Toast.makeText(this,"第一个分类名称 : "
+                + nuoMiCategoryList.get(0).cat_name,Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
+    public void isNextPage(int nextPage) {
 
     }
 }

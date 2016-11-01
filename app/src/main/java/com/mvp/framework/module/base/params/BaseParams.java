@@ -72,4 +72,58 @@ public class BaseParams {
 
         return params;
     }
+
+
+    public String toString(){
+        Class<? extends BaseParams> clazz = this.getClass();
+        Class<? extends Object> superClass = clazz.getSuperclass();
+
+        Field[] fields = clazz.getDeclaredFields();
+        Field[] superFields = superClass.getDeclaredFields();
+
+        if (fields == null || fields.length == 0 ){
+            return "Params is null!";
+        }
+
+        String toString = "";
+
+        try {
+
+            for (Field field : fields) {
+                if (field.get(this) != null){
+                    field.setAccessible(true);
+                    ParamsName paramsName = field.getAnnotation(ParamsName.class);
+                    String key;
+                    if (paramsName == null){
+                        key = field.getName();
+                    }else {
+                        key = paramsName.value();
+                    }
+                    if (!key.equals("serialVersionUID")) {
+                        toString += key + " = " + String.valueOf(field.get(this)) + " & ";
+                    }
+                }
+            }
+
+            for (Field superField : superFields){
+                if (superField.get(this) != null){
+                    superField.setAccessible(true);
+                    ParamsName superParamsName = superField.getAnnotation(ParamsName.class);
+                    String superKey;
+                    if (superParamsName == null){
+                        superKey = superField.getName();
+                    }else {
+                        superKey = superParamsName.value();
+                    }
+                    if (!superKey.equals("serialVersionUID")){
+                        toString += superKey + " = " + String.valueOf(superField.get(this)) + " & ";
+                    }
+                }
+            }
+
+        } catch (IllegalAccessException e) {
+            e.printStackTrace();
+        }
+        return toString;
+    }
 }

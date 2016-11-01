@@ -20,7 +20,7 @@ public interface IBasePresenter<Params> {
 
     void accessSucceed(JSONObject response);
 
-    Map setParams();
+    Map getParams();
 
     IBaseModel getModel();
 

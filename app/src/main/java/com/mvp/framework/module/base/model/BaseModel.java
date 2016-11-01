@@ -48,7 +48,7 @@ public class BaseModel implements IBaseModel {
             serverUrl = ServerManager.getServerUrl(apiInterface);
         }
         request = new MyVolleyRequest(method, serverUrl
-                , basePresenter.setParams()
+                , basePresenter.getParams()
                 , new Response.Listener<JSONObject>() {
             @Override
             public void onResponse(JSONObject response) {

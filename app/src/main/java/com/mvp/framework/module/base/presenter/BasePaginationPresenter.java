@@ -1,6 +1,7 @@
 package com.mvp.framework.module.base.presenter;
 
 import android.support.annotation.NonNull;
+import android.util.Log;
 
 import com.google.gson.Gson;
 import com.google.gson.internal.$Gson$Types;
@@ -13,6 +14,7 @@ import com.mvp.framework.module.base.response.BasePaginationResponse;
 import com.mvp.framework.module.base.view.iview.IMvpListView;
 import com.mvp.framework.utils.ClassTypeUtil;
 import com.mvp.framework.utils.ListUtils;
+import com.mvp.framework.utils.LogUtil;
 
 import org.json.JSONObject;
 
@@ -82,11 +84,11 @@ public abstract class BasePaginationPresenter<Params extends BasePaginationParam
             mParams = (Params) new BasePaginationParams();
             mParams.count = mCount;
             mParams.page = (int) Math.ceil((double)
-                    dataList.size() * 1.0 / ServerManager.COUNT) + 1;
+                    dataList.size() * 1.0 / mCount) + 1;
         }else {
             mParams.count = mCount;
             mParams.page = (int) Math.ceil((double)
-                    dataList.size() * 1.0 / ServerManager.COUNT) + 1;
+                    dataList.size() * 1.0 / mCount) + 1;
         }
 
         accessServer();
@@ -103,6 +105,7 @@ public abstract class BasePaginationPresenter<Params extends BasePaginationParam
              * 这里假设服务器第一页数据的下标为1
              * 如果下表为0，mPage = index / mCount;
              */
+            mIndex = index;
             mPage = index / mCount + 1;
             if (mParams == null){
                 mParams = (Params) new BasePaginationParams();
@@ -124,9 +127,10 @@ public abstract class BasePaginationPresenter<Params extends BasePaginationParam
 
 
     @Override
-    public Map setParams() {
+    public Map getParams() {
 
         if (mParams != null){
+            LogUtil.d(getClass(), "getParams: " + mParams.toString());
             return mParams.toMap();
         }else {
             return null;
@@ -178,13 +182,13 @@ public abstract class BasePaginationPresenter<Params extends BasePaginationParam
         if (mResponse.errNum == 0){
             if (mIndex < 0){
                 dataList.addAll(mResponse.data);
+                baseView.isNextPage(mResponse.nextPage);
             }else {
                 //计算出需要替换的第一个数据在dataList中的位置
-                int start = mPage * mCount;
+                int start = (mPage - 1) * mCount;
                 ListUtils.replaceAssign(start,dataList,mResponse.data);
                 mIndex = -1;
             }
-            baseView.isNextPage(mResponse.nextPage);
             serverResponse(dataList);
         }else {
             baseView.showServerError(mResponse.errNum,mResponse.errMsg);

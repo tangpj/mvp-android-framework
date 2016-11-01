@@ -24,6 +24,7 @@ public class NuoMiCategoryPresenter extends BasePaginationPresenter<BasePaginati
         super(nuoMiCategoryView,NuoMiCategoryBean.class);
         this.nuoMiCategoryView = nuoMiCategoryView;
         getModel().setApiInterface(NUO_MI_CATEGOR);
+        setCount(7);
     }
 
 

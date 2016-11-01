@@ -1,5 +1,7 @@
 package com.mvp.framework.utils;
 
+import android.util.Log;
+
 import java.util.List;
 
 /**
@@ -21,7 +23,9 @@ public class ListUtils {
      * @param newList 替换到toList的新数据
      */
     public static final <T> void replaceAssign(int start ,List<T> oldList,List<T> newList ){
-
+        LogUtil.d(ListUtils.class,"old list size = " + oldList.size()
+                + "; replace start index = " + start
+                + "; replace end index = " + (start + newList.size()) );
         for (int i = start; i < start + newList.size(); i++){
             oldList.set(i,newList.get(i - start));
         }

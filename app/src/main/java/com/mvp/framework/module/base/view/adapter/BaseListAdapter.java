@@ -32,7 +32,7 @@ public abstract class BaseListAdapter<Data> extends RecyclerView.Adapter<Recycle
     private int headerViewId;
     private int footerViewId;
 
-    private OnItemClickListener l;
+    private OnItemClickListener<Data> l;
 
     //数据源
     private List<Data> mData = new ArrayList<>();
@@ -206,6 +206,10 @@ public abstract class BaseListAdapter<Data> extends RecyclerView.Adapter<Recycle
         notifyItemChanged(mData.size() - 1);
     }
 
+    public void setOnItemClickListener(OnItemClickListener l){
+        this.l = l;
+    }
+
 
     private int getRealPosition(RecyclerView.ViewHolder holder) {
         int position = holder.getLayoutPosition();
@@ -222,6 +226,6 @@ public abstract class BaseListAdapter<Data> extends RecyclerView.Adapter<Recycle
     }
 
     public interface OnItemClickListener<Data>{
-        void onItemClick(int position,Data Data);
+        void onItemClick(int position,Data data);
     }
 }

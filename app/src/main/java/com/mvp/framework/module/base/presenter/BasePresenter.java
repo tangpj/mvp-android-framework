@@ -63,7 +63,7 @@ public abstract class BasePresenter<Params extends BaseParams,Data>
     }
 
     @Override
-    public Map setParams() {
+    public Map getParams() {
         if (params != null) {
             return params.toMap();
         } else {

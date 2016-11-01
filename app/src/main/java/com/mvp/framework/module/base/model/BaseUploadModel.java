@@ -26,6 +26,7 @@ public class BaseUploadModel implements IBaseModel {
 
     private PostUploadRequest postUploadRequest;
     private String apiInterface;
+    private String address;
 
     private BaseUploadPresenter baseUploadPresenter;
 
@@ -63,6 +64,11 @@ public class BaseUploadModel implements IBaseModel {
     @Override
     public void setApiInterface(String apiInterface){
         this.apiInterface = apiInterface;
+    }
+
+    @Override
+    public void setServerAddress(String address) {
+        this.address = address;
     }
 
     @Override

@@ -56,7 +56,6 @@ public class MyVolleyRequest extends Request<JSONObject> {
         Map<String,String> header = new HashMap<>();
         //设置百度api store请求头
         header.put("apikey","");
-        header.put("token", "0616c89cff594d9354688e982f8769cb");
         return header;
     }
 
