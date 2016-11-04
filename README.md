@@ -5,6 +5,5 @@
 对这个框架的详细教程可以在笔者的blog上查看，blog地址是：[http://tangpj.com/]()
 
 # License
-[][2]
 
-[2]:	http://choosealicense.com/licenses/mit/ "MIT协议"
+ MIT协议 (http://choosealicense.com/licenses/mit/)
