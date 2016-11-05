@@ -9,7 +9,7 @@ import com.android.volley.ParseError;
 import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.toolbox.HttpHeaderParser;
-import com.mvp.framework.module.base.params.FileUploadParams;
+import com.mvp.framework.module.params.FileUploadParams;
 
 import org.json.JSONException;
 import org.json.JSONObject;

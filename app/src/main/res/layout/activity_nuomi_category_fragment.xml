@@ -3,6 +3,6 @@
     android:id="@+id/fragment"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    class="com.mvp.framework.module.test.view.fragment.NuomiCategoryFragment">
+    class="com.example.test.view.fragment.NuomiCategoryFragment">
 
 </fragment>

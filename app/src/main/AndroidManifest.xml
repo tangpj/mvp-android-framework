@@ -19,18 +19,6 @@
             </intent-filter>
         </activity>
 
-        <activity
-            android:name=".module.test.view.activity.TestActivity"
-            android:label="@string/title_activity_test" />
-
-        <activity android:name=".module.test.view.activity.NuomiCategoryActivityActivity"
-            android:label=""/>
-
-        <activity android:name=".module.test.view.activity.WeatherActivity"/>
-        <activity android:name=".module.test.view.activity.NuoMiShopInfoActivity"/>
-        <activity android:name=".module.test.view.activity.WeatherFragmentActivity"/>
-        <activity android:name=".module.test.view.activity.NuomiCategoryFragmentActivity"/>
-        <activity android:name=".module.test.view.activity.NuomiShopInfoFragmentActivity"/>
 
     </application>
 
