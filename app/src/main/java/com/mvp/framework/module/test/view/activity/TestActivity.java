@@ -50,7 +50,7 @@ public class TestActivity extends BaseActivity {
         nuoMiCategoryBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(TestActivity.this,NuomiCategoryActivity.class);
+                Intent intent = new Intent(TestActivity.this,NuomiCategoryActivityActivity.class);
                 startActivity(intent);
             }
         });

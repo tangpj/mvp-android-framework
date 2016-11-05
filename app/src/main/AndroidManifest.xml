@@ -23,7 +23,7 @@
             android:name=".module.test.view.activity.TestActivity"
             android:label="@string/title_activity_test" />
 
-        <activity android:name=".module.test.view.activity.NuomiCategoryActivity"
+        <activity android:name=".module.test.view.activity.NuomiCategoryActivityActivity"
             android:label=""/>
 
         <activity android:name=".module.test.view.activity.WeatherActivity"/>

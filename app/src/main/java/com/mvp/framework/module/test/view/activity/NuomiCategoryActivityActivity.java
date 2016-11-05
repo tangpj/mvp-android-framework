@@ -6,7 +6,7 @@ import android.support.v7.widget.StaggeredGridLayoutManager;
 import com.mvp.framework.R;
 import com.mvp.framework.module.base.params.BasePaginationParams;
 import com.mvp.framework.module.base.presenter.BasePaginationPresenter;
-import com.mvp.framework.module.base.view.activity.MvpListActivityList;
+import com.mvp.framework.module.base.view.activity.MvpListActivity;
 import com.mvp.framework.module.base.view.adapter.BaseListAdapter;
 import com.mvp.framework.module.test.bean.NuoMiCategoryBean;
 import com.mvp.framework.module.test.presenter.NuoMiCategoryPresenter;
@@ -16,12 +16,12 @@ import com.mvp.framework.module.test.view.iview.INuoMiCategoryListView;
 import java.util.List;
 
 /**
- * @ClassName: NuomiCategoryActivity
+ * @ClassName: NuomiCategoryActivityActivity
  * @author create by Tang
  * @date date 16/10/24 下午5:10
  * @Description: 测试糯米分类
  */
-public class NuomiCategoryActivity extends MvpListActivityList<NuoMiCategoryBean> implements INuoMiCategoryListView {
+public class NuomiCategoryActivityActivity extends MvpListActivity<NuoMiCategoryBean> implements INuoMiCategoryListView {
 
     private NuoMiCategoryAdapter adapter;
 

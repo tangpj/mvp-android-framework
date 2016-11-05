@@ -32,14 +32,14 @@ import com.mvp.framework.utils.LogUtil;
 import java.util.List;
 
 /**
- * @ClassName: MvpListActivityList
+ * @ClassName: MvpListActivity
  * @author create by Tang
  * @date date 16/10/24 下午1:55
  * @Description:
  * 列表型Activity基类
  * 获取列表型数据的Activity继承该类可以实现自动处理大部分数据
  */
-public abstract class MvpListActivityList<Bean> extends AppCompatActivity
+public abstract class MvpListActivity<Bean> extends AppCompatActivity
         implements IMvpListActivity<Bean>,IMvpListView,IErrorInfo {
 
     private Toolbar toolbar;
@@ -283,7 +283,7 @@ public abstract class MvpListActivityList<Bean> extends AppCompatActivity
         baseRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
-                MvpListActivityList.this.onRefresh();
+                MvpListActivity.this.onRefresh();
             }
         });
 

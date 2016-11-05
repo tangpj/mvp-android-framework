@@ -15,7 +15,6 @@ import com.mvp.framework.module.test.params.WeatherParams;
 import com.mvp.framework.module.test.presenter.NuoMiCategoryPresenter;
 import com.mvp.framework.module.test.presenter.NuoMiShopInfoPresenter;
 import com.mvp.framework.module.test.presenter.WeatherPresenter;
-import com.mvp.framework.module.test.view.activity.NuomiCategoryActivity;
 import com.mvp.framework.module.test.view.activity.TestActivity;
 import com.mvp.framework.module.test.view.iview.INuoMiCategoryListView;
 import com.mvp.framework.module.test.view.iview.INuoMiShopInfoView;
