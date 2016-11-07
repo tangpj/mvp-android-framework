@@ -1,1 +1,2 @@
-include ':app', ':utillib', ':test', ':reslib', ":volley"
+include ':app', ':BaseLibraries:BaseUtilsLib', 'Business:test',
+        ':BaseLibraries:BaseApp', ':BaseLibraries:BaseMvpLib', ":BaseLibraries:volley"

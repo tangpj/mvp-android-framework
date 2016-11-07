@@ -24,7 +24,6 @@ public class MainActivity extends AppCompatActivity  {
 
         initView();
 
-
     }
 
     private void initView(){
@@ -38,7 +37,7 @@ public class MainActivity extends AppCompatActivity  {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent("com.example.testActivity.action");
-                intent.addCategory("com.example.testActivity.category");
+//                intent.addCategory("com.example.testActivity.category");
 //                Intent intent = new Intent(MainActivity.this, TestActivity.class);
                 startActivity(intent);
             }

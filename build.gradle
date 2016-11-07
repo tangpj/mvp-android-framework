@@ -19,6 +19,15 @@ allprojects {
     }
 }
 
+project.ext{
+    buildToolsVersion ="${BUILD_TOOLS_VERSION}"
+    compileSdkVersion = COMPILE_SDK_VERSION.toInteger()
+    minSdkVersion = MIN_SDK_VERSION
+    targetSdkVersion = TARGET_SDK_VERSION
+    versionCode = VERSION_CODE.toInteger()
+    versionName = "${VERSION_NAME}"
+}
+
 task clean(type: Delete) {
     delete rootProject.buildDir
 }

@@ -2,12 +2,15 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
+      <module fileurl="file://$PROJECT_DIR$/BaseLibraries/BaseApp/baseApp.iml" filepath="$PROJECT_DIR$/BaseLibraries/BaseApp/baseApp.iml" />
+      <module fileurl="file://$PROJECT_DIR$/BaseLibraries/BaseLibraries.iml" filepath="$PROJECT_DIR$/BaseLibraries/BaseLibraries.iml" />
+      <module fileurl="file://$PROJECT_DIR$/BaseLibraries/BaseMvpLib/basemvplib.iml" filepath="$PROJECT_DIR$/BaseLibraries/BaseMvpLib/basemvplib.iml" />
+      <module fileurl="file://$PROJECT_DIR$/BaseLibraries/BaseUtilsLib/BaseUtilsLib.iml" filepath="$PROJECT_DIR$/BaseLibraries/BaseUtilsLib/BaseUtilsLib.iml" />
+      <module fileurl="file://$PROJECT_DIR$/Business/Business.iml" filepath="$PROJECT_DIR$/Business/Business.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
       <module fileurl="file://$PROJECT_DIR$/mvp-android-framework.iml" filepath="$PROJECT_DIR$/mvp-android-framework.iml" />
-      <module fileurl="file://$PROJECT_DIR$/reslib/reslib.iml" filepath="$PROJECT_DIR$/reslib/reslib.iml" />
-      <module fileurl="file://$PROJECT_DIR$/test/test.iml" filepath="$PROJECT_DIR$/test/test.iml" />
-      <module fileurl="file://$PROJECT_DIR$/utillib/utillib.iml" filepath="$PROJECT_DIR$/utillib/utillib.iml" />
-      <module fileurl="file://$PROJECT_DIR$/volley/volley.iml" filepath="$PROJECT_DIR$/volley/volley.iml" />
+      <module fileurl="file://$PROJECT_DIR$/Business/test/test.iml" filepath="$PROJECT_DIR$/Business/test/test.iml" />
+      <module fileurl="file://$PROJECT_DIR$/BaseLibraries/volley/volley.iml" filepath="$PROJECT_DIR$/BaseLibraries/volley/volley.iml" />
     </modules>
   </component>
 </project>

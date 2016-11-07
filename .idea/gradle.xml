@@ -8,11 +8,14 @@
         <option name="modules">
           <set>
             <option value="$PROJECT_DIR$" />
+            <option value="$PROJECT_DIR$/BaseLibraries" />
+            <option value="$PROJECT_DIR$/BaseLibraries/BaseApp" />
+            <option value="$PROJECT_DIR$/BaseLibraries/BaseMvpLib" />
+            <option value="$PROJECT_DIR$/BaseLibraries/BaseUtilsLib" />
+            <option value="$PROJECT_DIR$/BaseLibraries/volley" />
+            <option value="$PROJECT_DIR$/Business" />
+            <option value="$PROJECT_DIR$/Business/test" />
             <option value="$PROJECT_DIR$/app" />
-            <option value="$PROJECT_DIR$/reslib" />
-            <option value="$PROJECT_DIR$/test" />
-            <option value="$PROJECT_DIR$/utillib" />
-            <option value="$PROJECT_DIR$/volley" />
           </set>
         </option>
         <option name="resolveModulePerSourceSet" value="false" />
