@@ -22,5 +22,6 @@ android {
 }
 
 dependencies {
+    if (!Boolean.valueOf(testIsDebug))
     compile project(":Business:test")
 }
