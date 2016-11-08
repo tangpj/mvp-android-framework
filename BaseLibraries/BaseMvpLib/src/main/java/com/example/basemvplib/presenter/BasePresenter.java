@@ -79,7 +79,7 @@ public abstract class BasePresenter<Params extends BaseParams,Data>
     public void accessServer(Params params) {
         this.params = params;
         mvpView.showProgress(true);
-        baseModel.sendRequestToServer();
+        getModel().sendRequestToServer();
     }
 
     @Override
@@ -119,7 +119,7 @@ public abstract class BasePresenter<Params extends BaseParams,Data>
 
     @Override
     public void cancelRequest() {
-        baseModel.cancelRequest();
+        getModel().cancelRequest();
     }
 
 
