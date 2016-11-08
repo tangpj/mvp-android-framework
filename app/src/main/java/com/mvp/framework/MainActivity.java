@@ -3,12 +3,15 @@ package com.mvp.framework;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.Button;
 
+import com.example.baseapp.activity.BaseActivity;
 
 
-public class MainActivity extends AppCompatActivity  {
+public class MainActivity extends BaseActivity {
 
     private static final String TAG = "MainActivity";
 
@@ -18,19 +21,17 @@ public class MainActivity extends AppCompatActivity  {
     private Button testBtn;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
-
-        initView();
-
+    public View setContentView(LayoutInflater inflater, ViewGroup container) {
+        View view = inflater.inflate(R.layout.activity_main,container,false);
+        initView(view);
+        return view;
     }
 
-    private void initView(){
-        weatherBtn = (Button) findViewById(R.id.weather_btn);
-        nuoMiCategoryBtn = (Button) findViewById(R.id.nuo_mi_category_btn);
-        nuoMiShopInfoBtn = (Button) findViewById(R.id.nuo_mi_shop_info_btn);
-        testBtn = (Button) findViewById(R.id.go_test) ;
+    private void initView(View view){
+        weatherBtn = (Button) view.findViewById(R.id.weather_btn);
+        nuoMiCategoryBtn = (Button) view.findViewById(R.id.nuo_mi_category_btn);
+        nuoMiShopInfoBtn = (Button) view.findViewById(R.id.nuo_mi_shop_info_btn);
+        testBtn = (Button) view.findViewById(R.id.go_test) ;
 
 
         testBtn.setOnClickListener(new View.OnClickListener() {
@@ -44,7 +45,4 @@ public class MainActivity extends AppCompatActivity  {
         });
 
     }
-
-
-
 }

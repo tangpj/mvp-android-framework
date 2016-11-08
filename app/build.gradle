@@ -22,6 +22,11 @@ android {
 }
 
 dependencies {
-    if (!Boolean.valueOf(testIsDebug))
-    compile project(":Business:test")
+    if(isDebug.toBoolean()){
+        compile project(':BaseLibraries:BaseApp')
+    }else{
+        compile project(":Business:test")
+    }
+
+
 }

@@ -2,9 +2,9 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/BaseLibraries/BaseApp/baseApp.iml" filepath="$PROJECT_DIR$/BaseLibraries/BaseApp/baseApp.iml" />
+      <module fileurl="file://$PROJECT_DIR$/BaseLibraries/BaseApp/BaseApp.iml" filepath="$PROJECT_DIR$/BaseLibraries/BaseApp/BaseApp.iml" />
       <module fileurl="file://$PROJECT_DIR$/BaseLibraries/BaseLibraries.iml" filepath="$PROJECT_DIR$/BaseLibraries/BaseLibraries.iml" />
-      <module fileurl="file://$PROJECT_DIR$/BaseLibraries/BaseMvpLib/basemvplib.iml" filepath="$PROJECT_DIR$/BaseLibraries/BaseMvpLib/basemvplib.iml" />
+      <module fileurl="file://$PROJECT_DIR$/BaseLibraries/BaseMvpLib/BaseMvpLib.iml" filepath="$PROJECT_DIR$/BaseLibraries/BaseMvpLib/BaseMvpLib.iml" />
       <module fileurl="file://$PROJECT_DIR$/BaseLibraries/BaseUtilsLib/BaseUtilsLib.iml" filepath="$PROJECT_DIR$/BaseLibraries/BaseUtilsLib/BaseUtilsLib.iml" />
       <module fileurl="file://$PROJECT_DIR$/Business/Business.iml" filepath="$PROJECT_DIR$/Business/Business.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />

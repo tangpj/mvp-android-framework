@@ -1,10 +1,20 @@
-apply plugin: 'com.android.library'
+
+if (isDebug.toBoolean()){
+    apply plugin: 'com.android.application'
+
+}else {
+    apply plugin: 'com.android.library'
+
+}
 
 android {
     compileSdkVersion rootProject.ext.compileSdkVersion
     buildToolsVersion rootProject.ext.buildToolsVersion
 
     defaultConfig {
+        if (isDebug.toBoolean() ){
+            applicationId "com.example.test"
+        }
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
         versionCode rootProject.ext.versionCode
@@ -18,6 +28,19 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
+    sourceSets{
+        main{
+
+            if (isDebug.toBoolean()){
+                manifest.srcFile 'src/main/debug/AndroidManifest.xml'
+
+            }else {
+                manifest.srcFile 'src/main/release/AndroidManifest.xml'
+            }
+        }
+    }
+
+
 }
 
 
