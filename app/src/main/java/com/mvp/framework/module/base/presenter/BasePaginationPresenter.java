@@ -153,7 +153,7 @@ public abstract class BasePaginationPresenter<Params extends BasePaginationParam
          *  这样处理是为了防止获取的列表数据出错
          */
         cancelRequest();
-        baseModel.sendRequestToServer();
+        getModel().sendRequestToServer();
     }
 
     /**
@@ -206,7 +206,7 @@ public abstract class BasePaginationPresenter<Params extends BasePaginationParam
 
     @Override
     public void cancelRequest() {
-        baseModel.cancelRequest();
+        getModel().cancelRequest();
     }
 
 }
