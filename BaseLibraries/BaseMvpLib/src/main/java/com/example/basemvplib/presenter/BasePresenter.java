@@ -1,6 +1,6 @@
 package com.example.basemvplib.presenter;
 
-import com.example.basemvplib.model.BaseModel;
+import com.example.basemvplib.model.VolleyModel;
 import com.example.basemvplib.model.imodel.IBaseModel;
 import com.example.basemvplib.params.BaseParams;
 import com.example.basemvplib.presenter.ipresenter.IBasePresenter;
@@ -44,7 +44,7 @@ public abstract class BasePresenter<Params extends BaseParams,Data>
      */
     public BasePresenter(IMvpView mvpView) {
         this.mvpView = mvpView;
-        this.baseModel = new BaseModel(this);
+        this.baseModel = new VolleyModel(this);
     }
 
     /**
@@ -56,7 +56,7 @@ public abstract class BasePresenter<Params extends BaseParams,Data>
      */
     public BasePresenter(IMvpView mvpView, Class<Data> clazz) {
         this.mvpView = mvpView;
-        this.baseModel = new BaseModel(this);
+        this.baseModel = new VolleyModel(this);
         this.clazz = clazz;
     }
 

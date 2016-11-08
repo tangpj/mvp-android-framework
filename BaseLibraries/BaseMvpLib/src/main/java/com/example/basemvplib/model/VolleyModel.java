@@ -16,12 +16,12 @@ import com.example.basemvplib.presenter.ipresenter.IBasePresenter;
 import org.json.JSONObject;
 
 /**
- * @ClassName: BaseModel
+ * @ClassName: VolleyModel
  * @author create by Tang
  * @date date 16/9/29 下午3:17
  * @Description: 通过volley框架从服务器获取数据
  */
-public class BaseModel implements IBaseModel {
+public class VolleyModel implements IBaseModel {
 
     private static final int  VOLLEY_ERROR = 10001;   //网络错误
     private static final String VOLLEY_ERROR_DESC = "网络错误，请检查网络连接";
@@ -34,7 +34,7 @@ public class BaseModel implements IBaseModel {
 
     private IBasePresenter basePresenter;
 
-    public BaseModel(IBasePresenter basePresenter){
+    public VolleyModel(IBasePresenter basePresenter){
         this.basePresenter = basePresenter;
     }
 

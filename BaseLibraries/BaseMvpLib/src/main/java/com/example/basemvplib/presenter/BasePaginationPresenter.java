@@ -3,7 +3,7 @@ package com.example.basemvplib.presenter;
 
 import android.support.annotation.NonNull;
 
-import com.example.basemvplib.model.BaseModel;
+import com.example.basemvplib.model.VolleyModel;
 import com.example.basemvplib.model.imodel.IBaseModel;
 import com.example.basemvplib.params.BasePaginationParams;
 import com.example.basemvplib.presenter.ipresenter.IBasePaginationPresenter;
@@ -64,7 +64,7 @@ public abstract class BasePaginationPresenter<Params extends BasePaginationParam
      */
     protected BasePaginationPresenter(@NonNull IMvpListView baseView, @NonNull Class<Bean> clazz){
         this.baseView = baseView;
-        this.baseModel = new BaseModel(this);
+        this.baseModel = new VolleyModel(this);
         this.clazz = clazz;
     }
 
