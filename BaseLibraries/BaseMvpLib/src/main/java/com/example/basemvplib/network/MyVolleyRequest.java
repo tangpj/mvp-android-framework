@@ -56,7 +56,7 @@ public class MyVolleyRequest extends Request<JSONObject> {
     @Override
     public Map<String, String> getHeaders() throws AuthFailureError {
         Map<String,String> header = new HashMap<>();
-        //设置百度api store请求头
+        //设置百度api store请求头z
         header.put("apikey","");
         return header;
     }
